@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cazadores de Ciberamenazas: 15 Casos Reales en Chile</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Mobile Menu Toggle Button -->
+    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+    </button>
+
+    <div class="app-container">
+        
+        <!-- Navigation Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="brand-section">
+                <img src="images/logo.png" alt="Hospital Metropolitano Logo" class="brand-logo" onerror="this.src='https://placehold.co/200x80/0b0f19/00f2ff?text=HOSPITAL'">
+                <div>
+                    <h1 class="brand-title">Hospital Metropolitano</h1>
+                    <span class="brand-subtitle" style="text-transform: none; letter-spacing: normal;">Seguridad de la Información y Ciberseguridad</span>
+                </div>
+            </div>
+            
+            <nav class="nav-menu" id="nav-menu">
+                <!-- Nav items generated dynamically by app.js -->
+            </nav>
+        </aside>
+
+        <!-- Main Workspace -->
+        <main class="main-viewport" id="main-viewport">
+            <div class="slide-deck">
+                
+                <!-- Active slides loaded here dynamically -->
+                <div id="slide-deck" style="width: 100%; display: flex; flex-direction: column; flex: 1;"></div>
+                
+                <!-- Bottom controls -->
+                <div class="bottom-bar">
+                    <button class="btn-nav" id="btn-prev" aria-label="Diapositiva anterior" disabled>
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="15 18 9 12 15 6"></polyline>
+                        </svg>
+                    </button>
+                    
+                    <span class="progress-info" id="progress-info">Cargando...</span>
+                    
+                    <button class="btn-nav" id="btn-next" aria-label="Diapositiva siguiente">
+                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+
+            </div>
+        </main>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

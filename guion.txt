@@ -1,0 +1,92 @@
+Módulo 1: Engaños Masivos (El día a día)
+Courier Fantasma:
+
+Qué explota: Curiosidad y urgencia.
+
+Cómo prevenir: Nunca accedas a links de correos no esperados. Revisa el dominio del remitente (ej: el dominio real debe ser correos.cl, no envios-correos-chile.xyz).
+
+SMS Banco Bloqueado (Smishing):
+
+Qué explota: Miedo a perder acceso a fondos.
+
+Cómo prevenir: El banco nunca envía links directos a login en SMS. Ante la duda, cierra el mensaje y entra a la App oficial manualmente.
+
+WhatsApp "Hola Papá/Mamá":
+
+Qué explota: Sesgo de afecto y urgencia emocional.
+
+Cómo prevenir: Establece una "palabra clave" familiar para emergencias. Si te piden dinero, llama a la persona por voz para verificar su identidad.
+
+Llamada "Ejecutivo de Fraude":
+
+Qué explota: Autoridad (la víctima cree hablar con un experto).
+
+Cómo prevenir: El banco jamás solicitará tus claves ni los códigos OTP (los que llegan por mensaje) por teléfono. Si te piden un código, corta de inmediato.
+
+Falsa Multa (TAG/Juzgado):
+
+Qué explota: Temor a sanciones legales o multas.
+
+Cómo prevenir: Las notificaciones oficiales no llegan por correo electrónico con adjuntos ejecutables (.zip, .exe). Consulta siempre el sitio oficial de la autopista o el Poder Judicial.
+
+Módulo 2: Riesgos Profesionales
+CEO Fraud (BEC):
+
+Qué explota: Autoridad jerárquica y confianza.
+
+Cómo prevenir: Establece un protocolo obligatorio de "doble verificación" para transferencias inusuales (ej: una llamada de voz obligatoria si el monto supera X cantidad).
+
+CV Malicioso:
+
+Qué explota: Curiosidad profesional.
+
+Cómo prevenir: Solo acepta documentos en formato PDF. Si un documento solicita "Habilitar macros" o "Habilitar edición", es una señal de alerta roja.
+
+Phishing de Credenciales (Nube):
+
+Qué explota: Hábito de trabajo colaborativo.
+
+Cómo prevenir: Usa autenticación de múltiples factores (MFA/2FA) obligatoria. Verifica siempre que la URL sea la oficial antes de digitar tu password.
+
+Man-in-the-Middle (Wi-Fi Público):
+
+Qué explota: Necesidad de conectividad.
+
+Cómo prevenir: Usa siempre una VPN corporativa en redes públicas o comparte internet desde tu celular. Nunca accedas a sistemas críticos en Wi-Fi abierto.
+
+USB "Regalado":
+
+Qué explota: Curiosidad y falta de protocolos de seguridad física.
+
+Cómo prevenir: Implementa políticas de "Bloqueo de Puertos USB" en los equipos del estudio. Nunca conectes un dispositivo desconocido a tu PC.
+
+Módulo 3: Salud y Cobranzas (Contexto Crítico)
+Falso Recordatorio Médico:
+
+Qué explota: Necesidad de atención y confianza en la institución.
+
+Cómo prevenir: Solo descarga aplicaciones desde las tiendas oficiales (Google Play/App Store). Desconfía de links que te lleven a descarga directa (APK).
+
+Falsa actualización de datos (Salud):
+
+Qué explota: Obligación administrativa.
+
+Cómo prevenir: La institución nunca pedirá datos de salud sensibles por teléfono ni enlaces. Acude siempre a las oficinas o portales web oficiales (con certificado SSL).
+
+Cobrador Extorsivo:
+
+Qué explota: Miedo al estigma social o consecuencias legales.
+
+Cómo prevenir: Verifica la existencia de la deuda en el sitio oficial de la institución financiera o portal de cobranza, nunca a través de links en correos amenazantes.
+
+Falso Soporte Técnico:
+
+Qué explota: Confianza en el soporte de IT.
+
+Cómo prevenir: El personal de TI tiene protocolos de identificación. Nunca entregues acceso remoto (AnyDesk, TeamViewer) si tú no iniciaste el ticket de soporte.
+
+Bonos Pendientes:
+
+Qué explota: Necesidad económica.
+
+Cómo prevenir: Los beneficios estatales se gestionan solo a través de portales gubernamentales (.gob.cl). Nadie te contactará por mensaje directo para "regalarte" dinero.

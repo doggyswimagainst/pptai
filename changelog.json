@@ -1,0 +1,39 @@
+{
+  "changelog": [
+    {
+      "version": "1.1.0",
+      "date": "2026-06-10",
+      "type": "Feature",
+      "semantic_intent": "Actualizar la identidad de marca del Hospital Metropolitano en la barra lateral e integrar el texto de la identidad institucional completa en el certificado digital, duplicando también el tamaño de los logos para mayor legibilidad y presencia visual.",
+      "impact": [
+        "index.html: Actualizada la sección de marca con el título 'Hospital Metropolitano' y el subtítulo 'Seguridad de la Información y Ciberseguridad'.",
+        "style.css: Duplicados los tamaños de los logos (.brand-logo a 80px, .cover-logo a 120px y .cert-logo a 96px), y ajustado el contenedor de marca de la barra lateral a diseño de columna.",
+        "app.js: Incluida la identidad institucional completa de ciberseguridad en el certificado digital."
+      ],
+      "lessons_learned": {
+        "technical_gotchas": [
+          "El ajuste de dirección flex a columna en la barra lateral resolvió problemas de desbordamiento horizontal al incrementar el tamaño del logo institucional.",
+          "El uso de estilos en línea en el generador de HTML dinámico de app.js facilitó la inserción directa de estilos estructurados para la firma del certificado sin requerir nuevas reglas globales CSS."
+        ]
+      }
+    },
+    {
+      "version": "1.0.0",
+      "date": "2026-06-10",
+      "type": "Feature",
+      "semantic_intent": "Crear una aplicación web interactiva local auto-sostenida para la inducción de ciberseguridad del Hospital Metropolitano, basada en los 15 casos reales de ciberestafas en Chile.",
+      "impact": [
+        "index.html: Estructura responsiva de la aplicación.",
+        "style.css: Diseño visual Cyber HUD y animaciones de radar/escaneo.",
+        "app.js: Lógica interactiva de estados, escaneo y verificación de checklist."
+      ],
+      "lessons_learned": {
+        "technical_gotchas": [
+          "Se utilizó el comando 'py' en lugar de 'python' en sistemas Windows donde el alias de ejecución estándar no está configurado por defecto.",
+          "Para la activación de entornos virtuales en PowerShell se debe usar '.\\venv\\Scripts\\Activate.ps1' en lugar de la sintaxis estándar de Bash.",
+          "Para un despliegue local instantáneo sin dependencias, estructurar la app con Vanilla JS/CSS evita la necesidad de configurar empaquetadores como Vite o Webpack."
+        ]
+      }
+    }
+  ]
+}
