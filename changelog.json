@@ -1,6 +1,24 @@
 {
   "changelog": [
     {
+      "version": "1.2.0",
+      "date": "2026-06-12",
+      "type": "Refactor",
+      "semantic_intent": "Reformular el diseño visual de la aplicación para alinearlo con el estilo institucional, claro y profesional de la publicación de recomendaciones de CSIRT Chile, incorporando un asistente interactivo para la recuperación de cuentas en redes sociales.",
+      "impact": [
+        "DESIGN.md: Actualizados los tokens de diseño visual a una paleta clara y luminosa (marino, coral, verde, gris azulado) con estilo CSIRT.",
+        "style.css: Reescrita la hoja de estilos para implementar el tema claro, formas geométricas angulares, sombras de elevación, líneas de conexión de infografía y estilos del asistente de redes sociales.",
+        "app.js: Rediseñadas las diapositivas de la aplicación, incorporado el nuevo Asistente de Recuperación interactivo de redes sociales (Facebook, Twitter, LinkedIn) y adaptada la lógica de navegación para 19 slides."
+      ],
+      "lessons_learned": {
+        "technical_gotchas": [
+          "El uso de clip-path y gradientes lineales para acentos oblicuos proporciona efectos visuales de cortes geométricos limpios y de alta fidelidad sin necesidad de cargar imágenes pesadas.",
+          "La separación de las diapositivas y la adición del widget de redes sociales se realizó sin alterar el array de casos originales para cumplir estrictamente con los estándares de retrocompatibilidad.",
+          "El simulador interactivo de redes sociales mejora la retención del usuario al simular flujos reales de Centro de Ayuda y búsqueda del CSIRT."
+        ]
+      }
+    },
+    {
       "version": "1.1.0",
       "date": "2026-06-10",
       "type": "Feature",

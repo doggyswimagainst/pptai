@@ -1,53 +1,54 @@
 ---
-name: Cazadores de Ciberamenazas - Hospital Metropolitano
+name: Cazadores de Ciberamenazas - Hospital Metropolitano (CSIRT Style)
 colors:
-  surface: '#0B0F19'
-  surface-dim: '#060A13'
-  surface-bright: '#111827'
-  surface-container-lowest: '#030712'
-  surface-container-low: '#0B0F19'
-  surface-container: '#111827'
-  surface-container-high: '#1F2937'
-  surface-container-highest: '#374151'
-  on-surface: '#F9FAFB'
-  on-surface-variant: '#9CA3AF'
-  inverse-surface: '#F3F4F6'
-  inverse-on-surface: '#111827'
-  outline: '#4B5563'
-  outline-variant: '#374151'
-  surface-tint: '#00F2FF'
-  primary: '#00F2FF'
-  on-primary: '#030712'
-  primary-container: '#0D2040'
-  on-primary-container: '#00F2FF'
-  inverse-primary: '#00A3FF'
-  secondary: '#FF3366'
+  surface: '#FFFFFF'
+  surface-dim: '#F0F4F8'
+  surface-bright: '#FFFFFF'
+  surface-container-lowest: '#FFFFFF'
+  surface-container-low: '#F8FAFC'
+  surface-container: '#FFFFFF'
+  surface-container-high: '#EDF2F7'
+  surface-container-highest: '#E2E8F0'
+  on-surface: '#0F1E36'
+  on-surface-variant: '#4A5568'
+  inverse-surface: '#0F1E36'
+  inverse-on-surface: '#FFFFFF'
+  outline: '#CBD5E0'
+  outline-variant: '#E2E8F0'
+  surface-tint: '#0B2545'
+  primary: '#0B2545'
+  on-primary: '#FFFFFF'
+  primary-container: '#E2E8F0'
+  on-primary-container: '#0B2545'
+  inverse-primary: '#3182CE'
+  secondary: '#FF5A5F'
   on-secondary: '#FFFFFF'
-  secondary-container: '#4A1121'
-  on-secondary-container: '#FF80A0'
-  tertiary: '#00FFCC'
-  on-tertiary: '#030712'
-  tertiary-container: '#063A36'
-  on-tertiary-container: '#00FFCC'
-  error: '#FF3366'
+  secondary-container: '#FFEBEB'
+  on-secondary-container: '#FF5A5F'
+  tertiary: '#2F855A'
+  on-tertiary: '#FFFFFF'
+  tertiary-container: '#E6F4EA'
+  on-tertiary-container: '#2F855A'
+  error: '#FF5A5F'
   on-error: '#FFFFFF'
-  error-container: '#4A1121'
-  on-error-container: '#FF80A0'
-  primary-fixed: '#C2F3FF'
-  primary-fixed-dim: '#85E3FF'
-  on-primary-fixed: '#00202A'
-  on-primary-fixed-variant: '#004C63'
-  secondary-fixed: '#FFE4E9'
-  secondary-fixed-dim: '#FFB2C1'
-  on-secondary-fixed: '#3D0012'
-  on-secondary-fixed-variant: '#6B0028'
-  tertiary-fixed: '#C7FFF3'
-  tertiary-fixed-dim: '#8CFFE4'
-  on-tertiary-fixed: '#00201A'
-  on-tertiary-fixed-variant: '#005142'
-  background: '#030712'
-  on-background: '#F9FAFB'
-  surface-variant: '#111827'
+  error-container: '#FFEBEB'
+  on-error-container: '#FF5A5F'
+  primary-fixed: '#D9E2EC'
+  primary-fixed-dim: '#BCCCDC'
+  on-primary-fixed: '#0B2545'
+  on-primary-fixed-variant: '#102A43'
+  secondary-fixed: '#FFD8D8'
+  secondary-fixed-dim: '#FFB3B3'
+  on-secondary-fixed: '#610505'
+  on-secondary-fixed-variant: '#8A0A0A'
+  tertiary-fixed: '#D1E7DD'
+  tertiary-fixed-dim: '#A3CFBB'
+  on-tertiary-fixed: '#0F5132'
+  on-tertiary-fixed-variant: '#146C43'
+  background: '#F0F4F8'
+  on-background: '#0F1E36'
+  surface-variant: '#EDF2F7'
+  outline-glow: 'rgba(11, 37, 69, 0.1)'
 typography:
   h1:
     fontFamily: Public Sans
@@ -114,26 +115,25 @@ spacing:
 
 ## Brand & Style
 
-The visual identity is designed to project a high-stakes, professional, and modern cybersecurity environment. It combines dark, technical interfaces with vibrant neon highlights (cyan and cyber pink/red) to create an alert, detective-style tone. 
+The visual identity is redesigned to project a highly professional, institutional, and accessible cibersecurity environment based on CSIRT advisory publications. It uses a **Light and Bright** theme that replaces clandestine neon tones with clean, structured surfaces and corporate authority.
 
-The brand image incorporates the identity of the **Hospital Metropolitano**, blending the clinical urgency of healthcare with state-of-the-art security awareness.
+The brand image continues to support the **Hospital Metropolitano** and is combined with CSIRT's national cybersecurity guidelines.
 
 ## Colors
 
-- **Cybersecurity Dark (#030712 / #0B0F19):** Background and primary surfaces to represent the digital underworld and the shadows where cyber threats lurk.
-- **Cyber Blue/Cyan (#00F2FF):** The main accent color, symbolizing technology, detection, and the modern detective's digital flashlight.
-- **Warning Red/Pink (#FF3366):** Reserved for alarms, vulnerabilities, phishing indicators, and immediate danger warnings.
-- **Safe Green/Teal (#00FFCC):** Used to represent security tips, safe actions, and recovery protocols.
+- **CSIRT Light Grey/Blue (#F0F4F8):** Primary background layer to evoke cleanliness, modernity, and clarity.
+- **CSIRT Navy (#0B2545):** Primary brand color, representing institutional security, authority, and official verification.
+- **Advisory Coral (#FF5A5F):** Accent color reserved for critical warnings, "NUNCA" indicators, and threat alerts.
+- **Trust Green (#2F855A):** Dedicated to safety protocols, mitigated state indicators, and successful actions.
 
 ## Typography
 
-- **Public Sans (Headlines):** A sturdy, authoritative geometric typeface that conveys institutional reliability and clinical precision.
-- **Inter (Body & Labels):** The gold standard for clean UI readability, minimizing cognitive fatigue for users scanning high-stakes information.
+- **Public Sans (Headlines):** High-density geometric sans-serif, rendered in heavy weights and uppercase styling for official notifications.
+- **Inter (Body & UI):** For high readability of technical descriptions, reducing cognitive fatigue.
 
-## Layout & Spacing
+## Shapes & Geometry
 
-Designed for **High Contrast Presentation Screens (16:9 Desktop)**. Wide layouts with ample spacing to avoid information overload. Visual elements (threat cards, warning alerts, checklist items) are given distinct spacing to guarantee legibility under high stress or low-light conditions.
-
-## Elevation & Depth
-
-No heavy gradients or skeuomorphism. The design utilizes sharp contrasts, low-opacity glow borders (`#00F2FF` at 15% opacity), and vertical layering (cards elevated above backgrounds via darker tones) to guide the viewer's eye.
+The interface incorporates **diagonal/slanted geometric accents** and **infographic connecting lines** inspired by the CSIRT publication layout:
+- Containers use 12px (`xl`) rounded corners with soft box shadows to look elevated.
+- Navigation elements are connected via vertical lines with nodes, guiding the user through the 15 cases.
+- Accent shapes are cut at angles (using CSS gradients or clip-path) to match the layout of the recommendations PDF.

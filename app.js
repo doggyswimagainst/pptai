@@ -138,7 +138,7 @@ const casesData = [
 ];
 
 // App Navigation & Interaction State
-let currentSlideIndex = 0; // 0: Cover, 1..15: Cases, 16: Checklist, 17: Closing
+let currentSlideIndex = 0; // 0: Cover, 1..15: Cases, 16: Social Recovery, 17: Checklist, 18: Closing
 const scannedSlides = new Set();
 const checkedRules = new Set();
 
@@ -163,7 +163,7 @@ function init() {
 // Generate the sidebar items dynamically
 function renderSidebarMenu() {
     navMenu.innerHTML = "";
-    
+
     // Add Cover item
     const coverItem = document.createElement("div");
     coverItem.className = `nav-item ${currentSlideIndex === 0 ? 'active' : ''}`;
@@ -190,20 +190,27 @@ function renderSidebarMenu() {
         navMenu.appendChild(caseItem);
     });
 
-    // Add Checklist item
+    // Add Social Recovery Assistant (Slide 16)
+    const recoveryItem = document.createElement("div");
+    recoveryItem.className = `nav-item ${currentSlideIndex === 16 ? 'active' : ''}`;
+    recoveryItem.innerHTML = `<span class="nav-num">16</span> <span>Asistente de Recuperación (CSIRT)</span>`;
+    recoveryItem.addEventListener("click", () => navigateTo(16));
+    navMenu.appendChild(recoveryItem);
+
+    // Add Checklist item (Slide 17)
     const checklistItem = document.createElement("div");
-    checklistItem.className = `nav-item ${currentSlideIndex === 16 ? 'active' : ''}`;
-    checklistItem.innerHTML = `<span class="nav-num">16</span> <span>Checklist de Supervivencia</span>`;
-    checklistItem.addEventListener("click", () => navigateTo(16));
+    checklistItem.className = `nav-item ${currentSlideIndex === 17 ? 'active' : ''}`;
+    checklistItem.innerHTML = `<span class="nav-num">17</span> <span>Checklist de Supervivencia</span>`;
+    checklistItem.addEventListener("click", () => navigateTo(17));
     navMenu.appendChild(checklistItem);
 
-    // Add Closing item
+    // Add Closing item (Slide 18)
     const closingItem = document.createElement("div");
-    closingItem.className = `nav-item ${currentSlideIndex === 17 ? 'active' : ''}`;
-    closingItem.innerHTML = `<span class="nav-num">17</span> <span>Cierre y Certificado</span>`;
+    closingItem.className = `nav-item ${currentSlideIndex === 18 ? 'active' : ''}`;
+    closingItem.innerHTML = `<span class="nav-num">18</span> <span>Cierre y Certificado</span>`;
     closingItem.addEventListener("click", () => {
         if (checkedRules.size >= 3) {
-            navigateTo(17);
+            navigateTo(18);
         }
     });
     navMenu.appendChild(closingItem);
@@ -211,6 +218,8 @@ function renderSidebarMenu() {
 
 // Generate slides HTML dynamically
 function renderSlides() {
+    slideDeck.innerHTML = ""; // Clear container
+
     // 1. Portada (Slide 0)
     const coverSlide = document.createElement("div");
     coverSlide.id = "slide-0";
@@ -220,8 +229,8 @@ function renderSlides() {
         <h1 class="cover-title">Cazadores de Ciberamenazas:<br>15 Casos Reales en Chile</h1>
         <p class="cover-subtitle">Guía de supervivencia e inducción interactiva para profesionales de la salud y áreas legales.</p>
         <div class="cover-logo-container">
-            <span class="cover-logo-label">Imagen de Marca</span>
-            <img src="images/logo.png" alt="Hospital Metropolitano Logo" class="cover-logo" onerror="this.src='https://placehold.co/200x60/0b0f19/00f2ff?text=Hospital+Metropolitano'">
+            <span class="cover-logo-label"></span>
+            <img src="images/logo.png" alt="Hospital Metropolitano Logo" class="cover-logo" onerror="this.src='https://placehold.co/200x60/ffffff/0b2545?text=Hospital+Metropolitano'">
         </div>
     `;
     slideDeck.appendChild(coverSlide);
@@ -285,13 +294,20 @@ function renderSlides() {
         const scanBox = caseSlide.querySelector(`#scan-box-${slideIdx}`);
         const scanBtn = caseSlide.querySelector(`#scan-btn-${slideIdx}`);
         const resultBox = caseSlide.querySelector(`#result-box-${slideIdx}`);
-        
+
+        // If it was already scanned in this session, keep it open
+        if (scannedSlides.has(slideIdx)) {
+            scanBtn.textContent = "Amenaza Detectada";
+            scanBtn.disabled = true;
+            resultBox.classList.add("active");
+        }
+
         const triggerScan = () => {
             if (scannedSlides.has(slideIdx)) return;
             scanBox.classList.add("scanning");
             scanBtn.textContent = "Escaneando...";
             scanBtn.disabled = true;
-            
+
             setTimeout(() => {
                 scanBox.classList.remove("scanning");
                 scanBtn.textContent = "Amenaza Detectada";
@@ -307,10 +323,64 @@ function renderSlides() {
         });
     });
 
-    // 3. Checklist Slide (Slide 16)
+    // 3. Social Recovery Assistant (Slide 16)
+    const socialSlide = document.createElement("div");
+    socialSlide.id = "slide-16";
+    socialSlide.className = `slide ${currentSlideIndex === 16 ? 'active' : ''}`;
+    socialSlide.innerHTML = `
+        <div class="case-header">
+            <div class="case-info">
+                <span class="case-tag">Herramienta Interactiva</span>
+                <h2 class="case-title">Asistente de Recuperación de Cuentas</h2>
+            </div>
+            <div class="case-icon-wrapper" style="color: var(--primary);">
+                <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            </div>
+        </div>
+        
+        <p class="cover-subtitle" style="text-align: left; max-width: 1000px; font-size: 0.95rem; margin-bottom: 8px;">
+            Si has perdido el acceso a tus redes sociales, selecciona una plataforma para simular los pasos de recuperación recomendados por el CSIRT:
+        </p>
+
+        <div class="social-recovery-widget">
+            <div class="social-tabs">
+                <button class="social-tab tab-facebook active" data-network="facebook">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="margin-right:4px;"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                    Facebook
+                </button>
+                <button class="social-tab tab-twitter" data-network="twitter">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="margin-right:4px;"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
+                    Twitter (X)
+                </button>
+                <button class="social-tab tab-linkedin" data-network="linkedin">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" style="margin-right:4px;"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    LinkedIn
+                </button>
+             </div>
+             
+             <div class="recovery-content-panel" id="recovery-content-panel">
+                 <!-- Creado dinámicamente -->
+             </div>
+         </div>
+     `;
+    slideDeck.appendChild(socialSlide);
+
+    // Setup tab events
+    const tabs = socialSlide.querySelectorAll(".social-tab");
+    tabs.forEach(tab => {
+        tab.addEventListener("click", () => {
+            tabs.forEach(t => t.classList.remove("active"));
+            tab.classList.add("active");
+            updateSocialRecoveryWidget();
+        });
+    });
+    // First load
+    setTimeout(updateSocialRecoveryWidget, 50);
+
+    // 4. Checklist Slide (Slide 17)
     const checklistSlide = document.createElement("div");
-    checklistSlide.id = "slide-16";
-    checklistSlide.className = `slide ${currentSlideIndex === 16 ? 'active' : ''}`;
+    checklistSlide.id = "slide-17";
+    checklistSlide.className = `slide ${currentSlideIndex === 17 ? 'active' : ''}`;
     checklistSlide.innerHTML = `
         <div class="case-header">
             <div class="case-info">
@@ -363,8 +433,11 @@ function renderSlides() {
     // Setup checklist triggers
     const checkItems = checklistSlide.querySelectorAll(".checklist-item");
     checkItems.forEach(item => {
+        const ruleId = item.getAttribute("data-rule");
+        if (checkedRules.has(ruleId)) {
+            item.classList.add("checked");
+        }
         item.addEventListener("click", () => {
-            const ruleId = item.getAttribute("data-rule");
             if (checkedRules.has(ruleId)) {
                 checkedRules.delete(ruleId);
                 item.classList.remove("checked");
@@ -376,24 +449,24 @@ function renderSlides() {
         });
     });
 
-    // 4. Closing & Certificate (Slide 17)
+    // 5. Closing & Certificate (Slide 18)
     const closingSlide = document.createElement("div");
-    closingSlide.id = "slide-17";
-    closingSlide.className = `slide ${currentSlideIndex === 17 ? 'active' : ''} closing-slide`;
+    closingSlide.id = "slide-18";
+    closingSlide.className = `slide ${currentSlideIndex === 18 ? 'active' : ''} closing-slide`;
     closingSlide.innerHTML = `
         <div class="certificate-card">
-            <img src="images/logo.png" alt="Hospital Metropolitano" class="cert-logo" onerror="this.src='https://placehold.co/200x96/0b0f19/00f2ff?text=Hospital+Metropolitano'">
+            <img src="images/logo.png" alt="Hospital Metropolitano" class="cert-logo" onerror="this.src='https://placehold.co/200x96/ffffff/0b2545?text=Hospital+Metropolitano'">
             <div style="font-size: 0.85rem; color: var(--primary); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 16px; font-weight: 700;">Hospital Metropolitano<br><span style="color: var(--text-muted); font-size: 0.75rem; text-transform: none; font-weight: 400; letter-spacing: normal;">Seguridad de la Información y Ciberseguridad</span></div>
             <div class="cert-title">Certificado de Supervivencia Digital</div>
-            <p class="cert-desc">Se otorga el presente reconocimiento por haber completado con éxito la capacitación interactiva y comprender las ciberamenazas más recurrentes.</p>
+            <p class="cert-desc">Se otorga el presente reconocimiento por haber completado con éxito la capacitación interactiva y comprender las ciberamenazas más recurrentes de acuerdo con las directrices de seguridad.</p>
             <div class="cert-recipient" id="cert-recipient-name">Profesional del Hospital</div>
             <div class="cert-footer">
                 <div>Fecha: 2026</div>
-                <div class="cert-sign">Mesa de Ayuda TI</div>
+                <div class="cert-sign">Mesa de Ayuda Informática</div>
             </div>
         </div>
         
-        <p class="cover-subtitle" style="font-weight: 500; color: var(--tertiary);">
+        <p class="cover-subtitle" style="font-weight: 600; color: var(--tertiary);">
             ¡Felicidades! La seguridad de la información es tarea de todos nosotros.
         </p>
         <button class="btn-restart" id="btn-restart-app">Reiniciar Capacitación</button>
@@ -403,7 +476,7 @@ function renderSlides() {
     document.getElementById("btn-restart-app").addEventListener("click", () => {
         scannedSlides.clear();
         checkedRules.clear();
-        
+
         // Reset threat scan UI states
         document.querySelectorAll(".result-box").forEach(box => box.classList.remove("active"));
         document.querySelectorAll(".scan-btn").forEach(btn => {
@@ -411,36 +484,201 @@ function renderSlides() {
             btn.disabled = false;
         });
         document.querySelectorAll(".checklist-item").forEach(item => item.classList.remove("checked"));
-        
+
         navigateTo(0);
     });
 }
 
+// Function to render active social network recovery tab contents
+function updateSocialRecoveryWidget() {
+    const panel = document.getElementById("recovery-content-panel");
+    if (!panel) return;
+
+    const activeTab = document.querySelector(".social-tab.active");
+    const network = activeTab ? activeTab.getAttribute("data-network") : "facebook";
+
+    if (network === "facebook") {
+        panel.innerHTML = `
+            <div class="recovery-instruction-card">
+                <strong>Recomendación CSIRT para Facebook:</strong> Accede al "Servicio de Ayuda" en el banner superior (símbolo de interrogación). Navega a <strong>Privacidad y seguridad</strong> y selecciona <strong>Cuentas falsas y robadas</strong>, luego selecciona "Creo que alguien hackeó mi cuenta".
+            </div>
+            <div class="recovery-interactive-area">
+                <label style="font-size: 0.85rem; font-weight: 700; color: var(--primary); display:block; margin-bottom:6px;">Simular reporte de cuenta comprometida:</label>
+                <input type="text" class="recovery-input" id="fb-profile-url" placeholder="Enlace a tu perfil de Facebook (ej: facebook.com/usuario)" style="margin-bottom:8px;">
+                <textarea class="recovery-input" id="fb-details" placeholder="Describe los detalles de la suplantación o hackeo..." rows="2" style="margin-bottom:8px;"></textarea>
+                <button class="recovery-button" id="fb-submit-btn" style="background-color: #1877F2;">Enviar Reporte Simulador</button>
+            </div>
+            <div class="recovery-step-indicator">
+                <span>Estado: Listo para reportar</span>
+                <span>Paso 1 de 2</span>
+            </div>
+        `;
+
+        document.getElementById("fb-submit-btn").addEventListener("click", () => {
+            const url = document.getElementById("fb-profile-url").value;
+            if (!url) {
+                alert("Por favor ingresa la URL de tu perfil.");
+                return;
+            }
+            panel.querySelector(".recovery-interactive-area").innerHTML = `
+                <div style="color: var(--tertiary); font-weight: 600; text-align: center; padding: 20px;">
+                    <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px; display:inline-block;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <p>¡Formulario enviado con éxito a Facebook!</p>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">El equipo de asistencia de Facebook revisará el reporte y se pondrá en contacto para verificar su identidad y restaurar el acceso.</p>
+                </div>
+            `;
+            panel.querySelector(".recovery-step-indicator").innerHTML = `
+                <span style="color: var(--tertiary); font-weight:700;">Reportado</span>
+                <span>Paso 2 de 2</span>
+            `;
+        });
+    }
+    else if (network === "twitter") {
+        panel.innerHTML = `
+            <div class="recovery-instruction-card">
+                <strong>Recomendación CSIRT para Twitter (X):</strong> 1. Solicita el restablecimiento de contraseña ingresando tu usuario/correo. 2. Si no funciona, solicita soporte directo en la sección "Cuenta Hackeada" del Centro de Ayuda.
+            </div>
+            <div class="recovery-interactive-area">
+                <label style="font-size: 0.85rem; font-weight: 700; color: var(--primary); display:block; margin-bottom:6px;">Selecciona una opción de recuperación:</label>
+                <select class="recovery-select" id="twitter-action-select" style="margin-bottom:8px;">
+                    <option value="reset">Opción 1: Reestablecer contraseña por cuenta</option>
+                    <option value="support">Opción 2: Contactar Soporte (Cuenta Hackeada)</option>
+                </select>
+                <div id="twitter-dynamic-form" style="margin-top: 6px; margin-bottom:8px;">
+                    <input type="text" class="recovery-input" id="tw-identifier" placeholder="Ingresa tu correo, teléfono o usuario de Twitter">
+                </div>
+                <button class="recovery-button" id="tw-submit-btn" style="background-color: #1DA1F2;">Procesar</button>
+            </div>
+            <div class="recovery-step-indicator">
+                <span>Estado: Selección de método</span>
+                <span>Paso 1 de 2</span>
+            </div>
+        `;
+
+        const select = document.getElementById("twitter-action-select");
+        const dynamicForm = document.getElementById("twitter-dynamic-form");
+
+        select.addEventListener("change", () => {
+            if (select.value === "reset") {
+                dynamicForm.innerHTML = `<input type="text" class="recovery-input" id="tw-identifier" placeholder="Ingresa tu correo, teléfono o usuario de Twitter">`;
+            } else {
+                dynamicForm.innerHTML = `
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px;">Serás derivado a la sección de soporte de Twitter para Cuentas Hackeadas.</p>
+                    <input type="text" class="recovery-input" id="tw-username" placeholder="Tu nombre de usuario (@usuario)" style="margin-bottom:6px;">
+                    <input type="email" class="recovery-input" id="tw-email" placeholder="Correo electrónico de contacto">
+                `;
+            }
+        });
+
+        document.getElementById("tw-submit-btn").addEventListener("click", () => {
+            const isReset = select.value === "reset";
+            if (isReset) {
+                const val = document.getElementById("tw-identifier").value;
+                if (!val) { alert("Por favor ingresa tu identificador."); return; }
+            } else {
+                const username = document.getElementById("tw-username").value;
+                const email = document.getElementById("tw-email").value;
+                if (!username || !email) { alert("Por favor completa los campos."); return; }
+            }
+
+            panel.querySelector(".recovery-interactive-area").innerHTML = `
+                <div style="color: var(--tertiary); font-weight: 600; text-align: center; padding: 20px;">
+                    <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px; display:inline-block;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    <p>¡Solicitud de recuperación procesada!</p>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">${isReset ? 'Revisa tu correo electrónico para ingresar la clave de restablecimiento temporal.' : 'El equipo de seguridad de Twitter/X te enviará un correo de verificación.'}</p>
+                </div>
+            `;
+            panel.querySelector(".recovery-step-indicator").innerHTML = `
+                <span style="color: var(--tertiary); font-weight:700;">Solicitud Enviada</span>
+                <span>Paso 2 de 2</span>
+            `;
+        });
+    }
+    else if (network === "linkedin") {
+        panel.innerHTML = `
+            <div class="recovery-instruction-card">
+                <strong>Recomendación CSIRT para LinkedIn:</strong> Busca "Denunciar una cuenta pirateada" en el Centro de Ayuda o accede directamente a su formulario oficial de verificación de identidad.
+            </div>
+            <div class="recovery-interactive-area" id="linkedin-recovery-step">
+                <label style="font-size: 0.85rem; font-weight: 700; color: var(--primary); display:block; margin-bottom:6px;">Simular búsqueda en Centro de Ayuda:</label>
+                <div style="display: flex; gap: 8px; margin-bottom:8px;">
+                    <input type="text" class="recovery-input" id="lk-search" placeholder="Escribe 'Denunciar una cuenta pirateada'...">
+                    <button class="recovery-button" id="lk-search-btn" style="background-color: #0A66C2; flex-shrink:0;">Buscar</button>
+                </div>
+                <div id="lk-search-results" style="margin-top: 10px; display:none;">
+                    <p style="font-size: 0.85rem; font-weight: 700; color: var(--primary); margin-bottom: 6px;">Resultado encontrado: "Denunciar cuenta pirateada en LinkedIn"</p>
+                    <button class="recovery-button" id="lk-open-form-btn" style="background-color: #0A66C2;">Abrir Formulario de Denuncia</button>
+                </div>
+            </div>
+            <div class="recovery-step-indicator">
+                <span>Estado: Buscando ayuda</span>
+                <span>Paso 1 de 3</span>
+            </div>
+        `;
+
+        const searchBtn = document.getElementById("lk-search-btn");
+        const searchInput = document.getElementById("lk-search");
+        const resultsDiv = document.getElementById("lk-search-results");
+
+        searchBtn.addEventListener("click", () => {
+            const text = searchInput.value.toLowerCase().trim();
+            if (text.includes("pirat") || text.includes("denunciar") || text.includes("hack") || text.includes("cuenta") || text !== "") {
+                resultsDiv.style.display = "block";
+                panel.querySelector(".recovery-step-indicator").innerHTML = `
+                    <span>Estado: Resultado encontrado</span>
+                    <span>Paso 2 de 3</span>
+                `;
+            } else {
+                alert("Por favor ingresa un término de búsqueda para continuar.");
+            }
+        });
+
+        panel.addEventListener("click", (e) => {
+            if (e.target && e.target.id === "lk-open-form-btn") {
+                panel.querySelector(".recovery-interactive-area").innerHTML = `
+                    <label style="font-size: 0.85rem; font-weight: 700; color: var(--primary); display:block; margin-bottom:6px;">Formulario Oficial de Denuncia (LinkedIn):</label>
+                    <input type="text" class="recovery-input" id="lk-profile-name" placeholder="Tu nombre completo en el perfil" style="margin-bottom:6px;">
+                    <input type="email" class="recovery-input" id="lk-contact-email" placeholder="Correo electrónico de contacto actual" style="margin-bottom:6px;">
+                    <textarea class="recovery-input" id="lk-details" placeholder="Explica detalladamente la situación y proporciona la fecha del hackeo..." rows="2" style="margin-bottom:8px;"></textarea>
+                    <button class="recovery-button" id="lk-submit-btn" style="background-color: #0A66C2;">Enviar Formulario</button>
+                `;
+
+                document.getElementById("lk-submit-btn").addEventListener("click", () => {
+                    const name = document.getElementById("lk-profile-name").value;
+                    const email = document.getElementById("lk-contact-email").value;
+                    if (!name || !email) { alert("Completa los campos del formulario."); return; }
+
+                    panel.querySelector(".recovery-interactive-area").innerHTML = `
+                        <div style="color: var(--tertiary); font-weight: 600; text-align: center; padding: 20px;">
+                            <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom: 12px; display:inline-block;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                            <p>¡Denuncia enviada exitosamente a LinkedIn!</p>
+                            <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 8px;">LinkedIn verificará la cuenta y te asistirá para recuperar el acceso de forma segura tras validar tu identidad.</p>
+                        </div>
+                    `;
+                    panel.querySelector(".recovery-step-indicator").innerHTML = `
+                        <span style="color: var(--tertiary); font-weight:700;">Reportado</span>
+                        <span>Paso 3 de 3</span>
+                    `;
+                });
+            }
+        });
+    }
+}
+
 // Perform page changes and updates
 function navigateTo(index) {
-    if (index < 0 || index > 17) return;
-    
+    if (index < 0 || index > 18) return;
+
     // Deactivate current slide
     document.getElementById(`slide-${currentSlideIndex}`).classList.remove("active");
-    
+
     currentSlideIndex = index;
-    
+
     // Activate target slide
     document.getElementById(`slide-${currentSlideIndex}`).classList.add("active");
-    
+
     // Close sidebar on mobile after choosing slide
     sidebar.classList.remove("open");
-    
-    // Update menu indicators
-    const menuItems = navMenu.querySelectorAll(".nav-item");
-    menuItems.forEach((item, idx) => {
-        let actualIndex = idx;
-        if (idx === 16) actualIndex = 16; // Checklist
-        else if (idx === 17) actualIndex = 17; // Certificate
-        else if (idx > 0) actualIndex = idx; // Cases are offset matched
-        
-        // Wait, index group matching has offset for titles. Let's just update all classes manually.
-    });
 
     renderSidebarMenu();
     updateNavigation();
@@ -451,19 +689,21 @@ function updateNavigation() {
     btnPrev.disabled = currentSlideIndex === 0;
 
     // Next button logic:
-    // If we are on the checklist (Slide 16), Next is only enabled if all 3 rules are checked
-    if (currentSlideIndex === 16) {
+    // If we are on the checklist (Slide 17), Next is only enabled if all 3 rules are checked
+    if (currentSlideIndex === 17) {
         btnNext.disabled = checkedRules.size < 3;
     } else {
-        btnNext.disabled = currentSlideIndex === 17;
+        btnNext.disabled = currentSlideIndex === 18;
     }
 
     // Update progress numbers
     if (currentSlideIndex === 0) {
         progressInfo.textContent = "Portada Principal";
     } else if (currentSlideIndex === 16) {
-        progressInfo.textContent = "Checklist de Supervivencia";
+        progressInfo.textContent = "Asistente de Recuperación (CSIRT)";
     } else if (currentSlideIndex === 17) {
+        progressInfo.textContent = "Checklist de Supervivencia";
+    } else if (currentSlideIndex === 18) {
         progressInfo.textContent = "Cierre e Inducción Completada";
     } else {
         progressInfo.textContent = `Caso ${currentSlideIndex} de 15`;
@@ -479,7 +719,7 @@ function setupEventListeners() {
     });
 
     btnNext.addEventListener("click", () => {
-        if (currentSlideIndex < 17) {
+        if (currentSlideIndex < 18) {
             navigateTo(currentSlideIndex + 1);
         }
     });
@@ -499,3 +739,4 @@ function setupEventListeners() {
 
 // Trigger initialization on page load
 window.addEventListener("DOMContentLoaded", init);
+
