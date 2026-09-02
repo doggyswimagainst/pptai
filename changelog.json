@@ -1,57 +1,211 @@
-{
-  "changelog": [
-    {
-      "version": "1.2.0",
-      "date": "2026-06-12",
-      "type": "Refactor",
-      "semantic_intent": "Reformular el diseño visual de la aplicación para alinearlo con el estilo institucional, claro y profesional de la publicación de recomendaciones de CSIRT Chile, incorporando un asistente interactivo para la recuperación de cuentas en redes sociales.",
-      "impact": [
-        "DESIGN.md: Actualizados los tokens de diseño visual a una paleta clara y luminosa (marino, coral, verde, gris azulado) con estilo CSIRT.",
-        "style.css: Reescrita la hoja de estilos para implementar el tema claro, formas geométricas angulares, sombras de elevación, líneas de conexión de infografía y estilos del asistente de redes sociales.",
-        "app.js: Rediseñadas las diapositivas de la aplicación, incorporado el nuevo Asistente de Recuperación interactivo de redes sociales (Facebook, Twitter, LinkedIn) y adaptada la lógica de navegación para 19 slides."
-      ],
-      "lessons_learned": {
-        "technical_gotchas": [
-          "El uso de clip-path y gradientes lineales para acentos oblicuos proporciona efectos visuales de cortes geométricos limpios y de alta fidelidad sin necesidad de cargar imágenes pesadas.",
-          "La separación de las diapositivas y la adición del widget de redes sociales se realizó sin alterar el array de casos originales para cumplir estrictamente con los estándares de retrocompatibilidad.",
-          "El simulador interactivo de redes sociales mejora la retención del usuario al simular flujos reales de Centro de Ayuda y búsqueda del CSIRT."
-        ]
-      }
-    },
-    {
-      "version": "1.1.0",
-      "date": "2026-06-10",
-      "type": "Feature",
-      "semantic_intent": "Actualizar la identidad de marca del Hospital Metropolitano en la barra lateral e integrar el texto de la identidad institucional completa en el certificado digital, duplicando también el tamaño de los logos para mayor legibilidad y presencia visual.",
-      "impact": [
-        "index.html: Actualizada la sección de marca con el título 'Hospital Metropolitano' y el subtítulo 'Seguridad de la Información y Ciberseguridad'.",
-        "style.css: Duplicados los tamaños de los logos (.brand-logo a 80px, .cover-logo a 120px y .cert-logo a 96px), y ajustado el contenedor de marca de la barra lateral a diseño de columna.",
-        "app.js: Incluida la identidad institucional completa de ciberseguridad en el certificado digital."
-      ],
-      "lessons_learned": {
-        "technical_gotchas": [
-          "El ajuste de dirección flex a columna en la barra lateral resolvió problemas de desbordamiento horizontal al incrementar el tamaño del logo institucional.",
-          "El uso de estilos en línea en el generador de HTML dinámico de app.js facilitó la inserción directa de estilos estructurados para la firma del certificado sin requerir nuevas reglas globales CSS."
-        ]
-      }
-    },
-    {
-      "version": "1.0.0",
-      "date": "2026-06-10",
-      "type": "Feature",
-      "semantic_intent": "Crear una aplicación web interactiva local auto-sostenida para la inducción de ciberseguridad del Hospital Metropolitano, basada en los 15 casos reales de ciberestafas en Chile.",
-      "impact": [
-        "index.html: Estructura responsiva de la aplicación.",
-        "style.css: Diseño visual Cyber HUD y animaciones de radar/escaneo.",
-        "app.js: Lógica interactiva de estados, escaneo y verificación de checklist."
-      ],
-      "lessons_learned": {
-        "technical_gotchas": [
-          "Se utilizó el comando 'py' en lugar de 'python' en sistemas Windows donde el alias de ejecución estándar no está configurado por defecto.",
-          "Para la activación de entornos virtuales en PowerShell se debe usar '.\\venv\\Scripts\\Activate.ps1' en lugar de la sintaxis estándar de Bash.",
-          "Para un despliegue local instantáneo sin dependencias, estructurar la app con Vanilla JS/CSS evita la necesidad de configurar empaquetadores como Vite o Webpack."
-        ]
-      }
-    }
-  ]
-}
+[
+  {
+    "timestamp": "2026-08-27T13:48:00-04:00",
+    "semantic_intent": "Creación del changelog inicial y estructura de presentación HTML ejecutiva basada en los tres documentos PDF de IA (IBM AI Guide, Apuntes y Hints de Prompts, e IA en el Hospital).",
+    "lessons_learned": [
+      "Es esencial desligar el enfoque temático principal del sesgo hospitalario manteniendo el Diagnóstico Diferencial y la Clasificación de Imágenes sólo como ejemplos de apoyo menores.",
+      "Integrar el diseño Obsidian Glass de Stitch en la aplicación HTML interactiva proporciona una estética visual ejecutiva sin depender de paquetes externos o librerías pesadas.",
+      "Asegurar ejemplos de prompting copiables e interactivos con sintaxis enriquecida mejora la utilidad del material didáctico."
+    ]
+  },
+  {
+    "timestamp": "2026-08-27T13:55:00-04:00",
+    "semantic_intent": "Rediseño completo de la interfaz de la presentación a una paleta luminosa/blanca corporativa, aumento de fuentes para auditorio masivo y reemplazo de la marca Stitch por la identidad visual del Hospital Metropolitano (logo.png).",
+    "lessons_learned": [
+      "Las presentaciones proyectadas en auditorios requieren tamaños de fuente base superiores a 19px para garantizar legibilidad a más de 5 metros de distancia.",
+      "El contraste entre texto azul marino (#0f172a / #1e40af) y fondo blanco mate (#f8fafc) elimina el cansancio visual y la saturación de los tonos fluorescentes oscuros en recintos iluminados.",
+      "La inclusión del logo.png oficial otorga pertenencia institucional manteniendo el contenido de la presentación enfocado en un carácter técnico y práctico general."
+    ]
+  },
+  {
+    "timestamp": "2026-08-27T14:03:00-04:00",
+    "semantic_intent": "Reemplazo de la frase 'Capacitación Ejecutiva' por 'Charla Agenda Abierta' en los membretes del encabezado y la portada de la presentación.",
+    "lessons_learned": [
+      "Ajustar la titulación institucional refleja de forma más exacta el formato participativo y de divulgación abierta de la sesión."
+    ]
+  },
+  {
+    "timestamp": "2026-08-27T14:09:00-04:00",
+    "semantic_intent": "Sustitución de la sección 'Evolución de Arquitecturas Generativas Profundas' en la Diapositiva 4 por el módulo interactivo 'Redes Neuronales: Interacción Gráfica' con enlace directo al laboratorio interactivo de MLU-Explain (https://mlu-explain.github.io/neural-networks/).",
+    "lessons_learned": [
+      "Conectar explicaciones teóricas con herramientas interactivas web vivas enriquece sustancialmente la dinamización didáctica durante charlas abiertas."
+    ]
+  },
+  {
+    "timestamp": "2026-08-27T14:19:00-04:00",
+    "semantic_intent": "Inclusión del nombre del expositor 'Guido Corral Arancibia' en la barra inferior fija y pie de cada diapositiva en el mismo tamaño institucional que 'Hospital Metropolitano', y adición de flechas flotantes en escenario.",
+    "lessons_learned": [
+      "Exponer handlers de navegación en el ámbito global window garantiza que los eventos de clic funcionen ininterrumpidamente sin importar el momento de renderizado del DOM.",
+      "La adición de flechas flotantes en los bordes del escenario complementa la barra inferior y los atajos de teclado para presentaciones fluidas."
+    ]
+  },
+  {
+    "timestamp": "2026-08-27T14:24:00-04:00",
+    "semantic_intent": "Eliminación del grupo de botones inferiores derechos ('Anterior' y 'Siguiente') del footer en todas las diapositivas, manteniendo la navegación mediante flechas flotantes laterales, atajos de teclado e índice desplegable.",
+    "lessons_learned": [
+      "Simplificar la interfaz de control inferior limpia la barra fija de pie de página manteniendo el protagonismo visual en la marca y el nombre del expositor."
+    ]
+  },
+  {
+    "timestamp": "2026-08-27T14:55:00-04:00",
+    "semantic_intent": "Eliminación completa de todas las barras de pie internas de las diapositivas (slide-footer-bar), consolidando la presencia de la frase 'Hospital Metropolitano • Expositor: Guido Corral Arancibia' única y exclusivamente en el pie de página fijo de la pantalla (footer inferior).",
+    "lessons_learned": [
+      "Consolidar la información de pie de página únicamente en la barra fija del viewport previene redundancias visuales y maximiza la limpieza estructural del escenario de diapositivas."
+    ]
+  },
+  {
+    "timestamp": "2026-08-27T15:57:00-04:00",
+    "semantic_intent": "Inclusión del enlace interactivo a un caso real de RAG en HOSMET (https://deskcl.femantech.cl/deskcl/) inmediatamente después del apartado teórico de Generación Aumentada por Recuperación en la Diapositiva 5.",
+    "lessons_learned": [
+      "Integrar ejemplos reales operacionales con plataformas institucionales vivas proporciona evidencia concreta de aplicación práctica para el auditorio."
+    ]
+  },
+  {
+    "timestamp": "2026-08-28T09:43:00-04:00",
+    "semantic_intent": "Incorporación de dos diapositivas de casos prácticos clínicos en RCE TrakCare: Caso Práctico 2 (Alerta Temprana de Deterioro Clínico con Razonamiento Abductivo y CoT) y Caso Práctico 3 (Auditoría Inteligente de Epicrisis y Codificación GRD con Few-Shot Prompting XML).",
+    "lessons_learned": [
+      "La estructura XML explícita (<context>, <task>, <constraints>) en prompts clínicos mejora sustancialmente la legibilidad del guion y previene alucinaciones en modelos de decisión CDSS.",
+      "El escape adecuado de entidades HTML (&lt;context&gt;) dentro de bloques de código pre/code es crítico para evitar interpretaciones erróneas del renderizador DOM del navegador.",
+      "La actualización dinámica del arreglo de diapositivas en JS se adapta automáticamente manteniendo el índice interactivo y la barra de progreso sin romper la navegación por teclado."
+    ]
+  },
+  {
+    "timestamp": "2026-08-28T10:04:00-04:00",
+    "semantic_intent": "Adición del formato JSON estructurado y ejemplo de prompt interactivo copiable para importación directa en Google Sheets (CSV/TSV/JSON) en la Diapositiva 9 (Formatos de Salida Avanzados).",
+    "lessons_learned": [
+      "Especificar tanto el esquema JSON como el bloque de código CSV en un mismo prompt permite a los usuarios utilizar la respuesta tanto en flujos de desarrollo API como en planillas de cálculo (Google Sheets / Excel) mediante 'Dividir texto en columnas'.",
+      "Organizar la Diapositiva 9 en tarjetas compuestas (JSON + Diagramas + Tabla de resumen) mejora la jerarquía visual de los formatos de salida."
+    ]
+  },
+  {
+    "timestamp": "2026-08-28T10:26:00-04:00",
+    "semantic_intent": "Adición de insignias vectoriales animadas (SVG + micro-animaciones CSS keyframe a 60fps) en los encabezados de las 13 diapositivas de la presentación para aportar dinamismo visual y atractivo técnico sin modificar el diseño ni la distribución del contenido.",
+    "lessons_learned": [
+      "El uso de animaciones vectoriales SVG nativas mediante CSS keyframe (pulseGlow, spinSlow, ekgDraw, scanBeamAnim, dashFlow) garantiza fluidez a 60fps sin sobrecargar el renderizado del navegador ni depender de librerías externas o archivos pesados.",
+      "Integrar insignias en un contenedor flexbox alineado a la derecha en slide-header preserva 100% la estructura tipográfica y la legibilidad para proyectores de auditorio."
+    ]
+  },
+  {
+    "timestamp": "2026-08-28T10:28:00-04:00",
+    "semantic_intent": "Inclusión de la nota explicativa 'Aplica a humanos perfectamente' en la sección de Sobreajuste (Overfitting) de la Diapositiva 4.",
+    "lessons_learned": [
+      "Agregar analogías humanas y apuntes didácticos en conceptos como Overfitting facilita la comprensión intuitiva de sesgos cognitivos y memorización en audiencias ejecutivas."
+    ]
+  },
+  {
+    "timestamp": "2026-08-28T11:37:00-04:00",
+    "semantic_intent": "Integración de los 11 archivos de imágenes y videos de la carpeta /images en el encabezado de las 13 diapositivas de la presentación, eliminando las insignias SVG previas e incorporando animaciones dinámicas CSS (efecto Ken Burns de zoom lento, destello de luz shimmer y animación de flotado 3D) manteniendo intacto el diseño y la maquetación.",
+    "lessons_learned": [
+      "El efecto Ken Burns mediante transform: scale(1.22) translate(-3%, -3%) combinado con shimmerSweep genera un acabado ultra-profesional y dinámico en imágenes estáticas sin desplazar el contenido del encabezado.",
+      "La inclusión de videos HTML5 MP4 con reproducción automática en bucle (autoplay, loop, muted, playsinline) otorga dinamismo de alto impacto en diapositivas clave (Portada, Razonamiento, Prompts con datos y Hoja de ruta)."
+    ]
+  },
+  {
+    "timestamp": "2026-08-28T11:40:00-04:00",
+    "semantic_intent": "Incremento de protagonismo visual de las imágenes y videos en cada diapositiva: ampliación a formato panorámico 16:9 (190x130px en diapositivas y 250x160px en Portada), anillo de borde brillante en degradé tricromático, elevación hover a scale(1.26), etiqueta '🔍 Ampliar Media' e integración de modal Lightbox para vista en pantalla completa al hacer clic.",
+    "lessons_learned": [
+      "Ampliar el contenedor a proporciones panorámicas 16:9 (190x130px) otorga una presencia cinematográfica destacada que realza el contenido multimedia sin desplazar el flujo tipográfico.",
+      "Integrar un modal Lightbox interactivo permite a los expositores ampliar cualquier imagen o video en tiempo real durante la presentación para mostrar detalles en alta definición."
+    ]
+  },
+  {
+    "timestamp": "2026-08-28T11:47:00-04:00",
+    "semantic_intent": "Reemplazo de los elementos multimedia de las diapositivas 11, 12 y 13 por los nuevos videos MP4 recién incorporados a /images: 6994873_Cyber_Science_Fiction_1280x720.mp4 (Diapositiva 11), 6994941_Cyborg_Humanoid_1280x720.mp4 (Diapositiva 12) y 6994310_Sugar_Skull_Day_Of_The_Dead_720x1280.mp4 (Diapositiva 13).",
+    "lessons_learned": [
+      "Asignar archivos MP4 únicos a las últimas tres diapositivas elimina la repetición de assets previamente usados y enriquece la variedad estética visual en la conclusión de la presentación.",
+      "Los contenedores de video en reproducción continua con autoplay, loop, muted y lightbox interactivo brindan una experiencia de demostración ágil durante ponencias clínicas."
+    ]
+  },
+  {
+    "timestamp": "2026-08-28T11:49:00-04:00",
+    "semantic_intent": "Eliminación del cuadro de búsqueda (.search-box) de la barra superior de navegación para simplificar la interfaz limpia del reproductor de la presentación.",
+    "lessons_learned": [
+      "Remover controles no indispensables de la barra superior maximiza la concentración de la audiencia en los contenidos y controles principales de navegación e índice."
+    ]
+  },
+  {
+    "timestamp": "2026-08-28T11:59:00-04:00",
+    "semantic_intent": "Integración gráfica de la imagen linea.jpg en la tarjeta 'Línea de Tiempo Histórica de la IA' (Diapositiva 2) mediante el contenedor animado de medios con soporte Ken Burns, destello de luz y lightbox ampliable al hacer clic.",
+    "lessons_learned": [
+      "Incorporar diagramas ilustrativos de línea de tiempo sobre hitos históricos estructurados en texto potencia la asimilación visual de la evolución tecnológica (1950 - 2026)."
+    ]
+  },
+  {
+    "timestamp": "2026-08-28T15:10:00-04:00",
+    "semantic_intent": "Adición del enlace/botón interactivo 'Quiz Inicial !!' (https://presenter.ahaslides.com/presentation/9952588?preview=true) en la portada (Diapositiva 1), con diseño destacado en degradé corporativo y badge de acceso directo a AhaSlides.",
+    "lessons_learned": [
+      "Integrar un botón interactivo CTA (Call to Action) en la diapositiva de portada fomenta la participación interactiva inmediata del auditorio al iniciar la sesión."
+    ]
+  },
+  {
+    "timestamp": "2026-08-28T15:43:00-04:00",
+    "semantic_intent": "Inclusión del enlace interactivo 'Ejemplo de Carga de datos JSON' (https://docs.google.com/spreadsheets/d/1j9VP98KJZDvsPtmZ91Vzt5rtbaFMIx2yg434NzXzJhU/edit?usp=sharing) en la Diapositiva 6 (Arquitectura Maestra de Prompt Engineering), conectando la plantilla de prompt estructurado con un ejemplo práctico en Google Sheets.",
+    "lessons_learned": [
+      "Vincular plantillas de prompts de salida estructurada con hojas de cálculo reales de Google Sheets facilita la experimentación directa del usuario en importación y análisis de datos."
+    ]
+  },
+  {
+    "timestamp": "2026-08-31T13:28:00-04:00",
+    "semantic_intent": "Inclusión de un tooltip interactivo sobre el término 'VAEs' en la Diapositiva 1 con la definición técnica completa (Variational Autoencoders o Autoencoders Variacionales) y estilos CSS oscuros de alto contraste.",
+    "lessons_learned": [
+      "El uso de contenedores 'tooltip-wrapper' con 'position: absolute' e 'z-index: 1000' en elementos de texto destacados permite enriquecer conceptualmente los acrónimos sin sobrecargar el espacio visual de la diapositiva.",
+      "Asignar 'tabindex=\"0\"' y eventos hover/focus a los componentes tooltip asegura su accesibilidad tanto por puntero como por teclado durante la presentación."
+    ]
+  },
+  {
+    "timestamp": "2026-08-31T13:31:00-04:00",
+    "semantic_intent": "Inclusión de tooltips interactivos para los términos 'Modelos de Difusión' y 'Transformers' en la Diapositiva 1 complementando las definiciones técnicas de arquitecturas generativas.",
+    "lessons_learned": [
+      "Encadenar múltiples tooltips accesibles en un mismo párrafo ('card-text') expande la capacidad explicativa sin romper la alineación ni la fluidez de lectura."
+    ]
+  },
+  {
+    "timestamp": "2026-08-31T13:34:00-04:00",
+    "semantic_intent": "Inclusión de tooltip interactivo explicativo sobre el acrónimo 'XAI' (Explicabilidad en IA) en el tercer módulo de la Diapositiva 1 (Despliegue & Gobernanza).",
+    "lessons_learned": [
+      "Aplicar tooltips explicativos sobre acrónimos clave como XAI dentro del bloque de Gobernanza permite definir términos de cumplimiento ético y auditoría sin alterar la brevedad del texto de la tarjeta."
+    ]
+  },
+  {
+    "timestamp": "2026-08-31T13:38:00-04:00",
+    "semantic_intent": "Inclusión de tooltip interactivo sobre el hito histórico 'Test de Turing' en la línea de tiempo de la Diapositiva 2 (Taxonomía y Evolución de la IA).",
+    "lessons_learned": [
+      "Integrar tooltips interactivos dentro de los encabezados de la línea de tiempo (.timeline-year) proporciona contexto histórico inmediato sin recargar la narrativa principal."
+    ]
+  },
+  {
+    "timestamp": "2026-08-31T13:42:00-04:00",
+    "semantic_intent": "Inclusión de tooltip interactivo enriquecido para 'IBM Watson gana Jeopardy! (2011)' en la Diapositiva 2, detallando su capacidad clave en NLP, funcionamiento en milisegundos y relevancia histórica.",
+    "lessons_learned": [
+      "Ajustar el ancho del contenedor del tooltip (width: 380px) para bloques extensos con subsecciones (Capacidad clave, Funcionamiento, Relevancia) garantiza una presentación visual estructurada y legible."
+    ]
+  },
+  {
+    "timestamp": "2026-08-31T13:49:00-04:00",
+    "semantic_intent": "Adición de la sección 'Dinámica única' al tooltip de IBM Watson en Jeopardy! (2011) en la Diapositiva 2, explicando la regla del concurso donde se formulan las respuestas en forma de pregunta.",
+    "lessons_learned": [
+      "Agregar la explicación del formato de Jeopardy! (pista afirmación -> respuesta pregunta) brinda un marco pedagógico esencial para comprender por qué el NLP de Watson fue un reto técnico superior."
+    ]
+  },
+  {
+    "timestamp": "2026-08-31T15:18:00-04:00",
+    "semantic_intent": "Actualización del prompt interactivo copiable 'Atención al Cliente' en el Capítulo 7 / Diapositiva 8, integrando el cuerpo completo del correo del cliente insatisfecho con licencias de software empresarial.",
+    "lessons_learned": [
+      "Incluir el texto real y completo del caso de uso dentro del bloque del prompt permite probar directamente en la herramienta de IA sin requerir variables auxiliares o datos externos."
+    ]
+  },
+  {
+    "timestamp": "2026-08-31T15:31:00-04:00",
+    "semantic_intent": "Adición de botón/caja interactiva con enlace a la planilla viva de Google Sheets (drive_link) en la Diapositiva 9 (Formatos de Salida Avanizados) para la importación directa de resultados JSON/CSV.",
+    "lessons_learned": [
+      "Vincular la caja de código del prompt JSON con una acción directa CTA a Google Sheets mejora sustancialmente la experiencia interactiva del expositor al demostrar la conversión de datos."
+    ]
+  },
+  {
+    "timestamp": "2026-08-31T16:46:00-04:00",
+    "semantic_intent": "Inclusión de tooltip interactivo enriquecido para el acrónimo 'PANDA' (Pancreatic Cancer Detection with Artificial Intelligence) en la Diapositiva 13, detallando su desarrollo por DAMO Academy (Alibaba) y su publicación en Nature Medicine.",
+    "lessons_learned": [
+      "El uso del contenedor tooltip-wrapper en los encabezados de tarjeta (.card-title) permite profundizar en acrónimos técnicos clave sin interferir en la limpieza del flujo de lectura principal."
+    ]
+  }
+]

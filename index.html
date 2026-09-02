@@ -1,68 +1,2543 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cazadores de Ciberamenazas: 15 Casos Reales en Chile</title>
-    <link rel="stylesheet" href="style.css">
+    <title>IA: De la Teoría a la Práctica y Prompting Avanzado | Hospital Metropolitano</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            /* Luminous Corporate Light Palette */
+            --bg-obsidian: #f8fafc;
+            --bg-stage: #f1f5f9;
+            --bg-card: #ffffff;
+            --bg-card-hover: #ffffff;
+            --border-glass: #e2e8f0;
+            --border-highlight: #2563eb;
+
+            --blue-primary: #1e40af;
+            --blue-hover: #1d4ed8;
+            --blue-glow: rgba(37, 99, 235, 0.15);
+            --teal-accent: #0f766e;
+            --indigo-accent: #4338ca;
+            --amber-accent: #d97706;
+
+            --text-main: #0f172a;
+            --text-muted: #334155;
+            --text-dim: #475569;
+
+            --font-head: 'Montserrat', sans-serif;
+            --font-body: 'Inter', sans-serif;
+            --font-code: 'Fira Code', monospace;
+
+            --radius-sm: 10px;
+            --radius-md: 16px;
+            --radius-lg: 24px;
+            --shadow-card: 0 4px 20px -2px rgba(15, 23, 42, 0.06), 0 2px 6px -1px rgba(15, 23, 42, 0.04);
+            --shadow-hover: 0 12px 30px -4px rgba(30, 64, 175, 0.12), 0 4px 12px -2px rgba(15, 23, 42, 0.08);
+            --transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-obsidian);
+            color: var(--text-main);
+            font-family: var(--font-body);
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+            background-image:
+                radial-gradient(circle at 10% 10%, rgba(37, 99, 235, 0.04) 0%, transparent 40%),
+                radial-gradient(circle at 90% 90%, rgba(15, 118, 110, 0.04) 0%, transparent 40%);
+        }
+
+        /* Top Bar Navigation (High visibility for large screen) */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: #ffffff;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 36px;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(15, 23, 42, 0.05);
+        }
+
+        .brand-logo {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .brand-logo img {
+            height: 48px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-title {
+            font-family: var(--font-head);
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: var(--blue-primary);
+            letter-spacing: -0.01em;
+            line-height: 1.1;
+        }
+
+        .brand-sub {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-box input {
+            background: #f1f5f9;
+            border: 1.5px solid #cbd5e1;
+            border-radius: 24px;
+            padding: 9px 18px 9px 42px;
+            color: var(--text-main);
+            font-size: 1.05rem;
+            font-weight: 500;
+            width: 260px;
+            transition: var(--transition);
+        }
+
+        .search-box input:focus {
+            outline: none;
+            background: #ffffff;
+            border-color: var(--blue-primary);
+            box-shadow: 0 0 0 3px var(--blue-glow);
+            width: 340px;
+        }
+
+        .search-box svg {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            fill: var(--text-muted);
+            width: 18px;
+            height: 18px;
+        }
+
+        .btn-action {
+            background: #f1f5f9;
+            border: 1.5px solid #cbd5e1;
+            color: var(--text-main);
+            padding: 10px 18px;
+            border-radius: var(--radius-sm);
+            font-size: 1.05rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: var(--transition);
+        }
+
+        .btn-action:hover {
+            background: #ffffff;
+            border-color: var(--blue-primary);
+            color: var(--blue-primary);
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.1);
+        }
+
+        .slide-counter {
+            font-family: var(--font-code);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--blue-primary);
+            background: #eff6ff;
+            padding: 7px 16px;
+            border-radius: 20px;
+            border: 1.5px solid #bfdbfe;
+        }
+
+        /* Presentation Layout Container */
+        .presentation-container {
+            position: relative;
+            width: 100vw;
+            height: calc(100vh - 80px - 65px);
+            margin-top: 80px;
+            display: flex;
+            overflow: hidden;
+        }
+
+        /* Sidebar Index Drawer */
+        .sidebar {
+            width: 380px;
+            background: #ffffff;
+            border-right: 2px solid #e2e8f0;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+            z-index: 80;
+            box-shadow: 4px 0 15px rgba(15, 23, 42, 0.03);
+        }
+
+        .sidebar.collapsed {
+            transform: translateX(-380px);
+            margin-right: -380px;
+        }
+
+        .sidebar-header {
+            padding: 24px;
+            border-bottom: 2px solid #e2e8f0;
+            font-family: var(--font-head);
+            font-size: 1.05rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-main);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #f8fafc;
+        }
+
+        .slide-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px;
+            list-style: none;
+        }
+
+        .slide-item {
+            padding: 14px 16px;
+            border-radius: var(--radius-sm);
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 1.5px solid transparent;
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+
+        .slide-item:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+        }
+
+        .slide-item.active {
+            background: #eff6ff;
+            border-color: var(--blue-primary);
+        }
+
+        .slide-num {
+            font-family: var(--font-code);
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--blue-primary);
+            background: #dbeafe;
+            padding: 3px 8px;
+            border-radius: 6px;
+            min-width: 28px;
+            text-align: center;
+        }
+
+        .slide-title-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+            line-height: 1.35;
+            color: var(--text-main);
+        }
+
+        .slide-item.active .slide-title-text {
+            color: var(--blue-primary);
+            font-weight: 800;
+        }
+
+        /* Main View Stage */
+        .stage {
+            flex: 1;
+            position: relative;
+            overflow-y: auto;
+            padding: 50px 70px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            background: var(--bg-stage);
+        }
+
+        /* Stage Floating Arrow Navigation Buttons */
+        .stage-nav-btn {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            background: #ffffff;
+            border: 2px solid #cbd5e1;
+            color: var(--blue-primary);
+            font-size: 2rem;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 90;
+            box-shadow: 0 6px 20px rgba(15, 23, 42, 0.12);
+            transition: var(--transition);
+            user-select: none;
+        }
+
+        .stage-nav-btn:hover {
+            background: var(--blue-primary);
+            border-color: var(--blue-primary);
+            color: #ffffff;
+            box-shadow: 0 8px 25px rgba(30, 64, 175, 0.3);
+            transform: translateY(-50%) scale(1.08);
+        }
+
+        .stage-nav-btn:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .stage-nav-btn.prev {
+            left: 410px;
+        }
+
+        .sidebar.collapsed~.stage .stage-nav-btn.prev {
+            left: 30px;
+        }
+
+        .stage-nav-btn.next {
+            right: 30px;
+        }
+
+        .slide {
+            display: none;
+            width: 100%;
+            max-width: 1350px;
+            animation: fadeIn 0.35s ease-out;
+            padding-bottom: 60px;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Auditorium Large Typography Elements */
+        .slide-header {
+            margin-bottom: 36px;
+            border-bottom: 2px solid #cbd5e1;
+            padding-bottom: 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 24px;
+        }
+
+        .slide-header-content {
+            flex: 1;
+        }
+
+        /* Dynamic Animated Media Container (Maximum Prominence) */
+        .slide-media-container {
+            width: 190px;
+            height: 130px;
+            border-radius: 18px;
+            border: 3px solid transparent;
+            background-image: linear-gradient(#0f172a, #0f172a), linear-gradient(135deg, #2563eb, #0f766e, #38bdf8);
+            background-origin: border-box;
+            background-clip: content-box, border-box;
+            overflow: hidden;
+            box-shadow: 0 10px 28px rgba(15, 23, 42, 0.22), 0 0 20px rgba(37, 99, 235, 0.25);
+            flex-shrink: 0;
+            position: relative;
+            animation: mediaContainerFloat 4s ease-in-out infinite;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            cursor: pointer;
+        }
+
+        .slide-media-container:hover {
+            transform: scale(1.26) translateY(-10px);
+            box-shadow: 0 22px 45px rgba(30, 64, 175, 0.48), 0 0 35px rgba(56, 189, 248, 0.55);
+            z-index: 100;
+        }
+
+        .slide-media-container::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg,
+                    transparent 45%,
+                    rgba(255, 255, 255, 0.4) 50%,
+                    transparent 55%);
+            animation: shimmerSweep 4.5s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        /* Hover Zoom Hint Badge */
+        .slide-media-container::before {
+            content: '🔍 Ampliar Media';
+            position: absolute;
+            bottom: 8px;
+            right: 8px;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+            color: #ffffff;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            pointer-events: none;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: all 0.3s ease;
+            z-index: 10;
+        }
+
+        .slide-media-container:hover::before {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-media-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            animation: kenBurns 10s ease-in-out infinite alternate;
+            transition: transform 0.4s ease, filter 0.4s ease;
+        }
+
+        .slide-media-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        @keyframes mediaContainerFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+                box-shadow: 0 10px 28px rgba(30, 64, 175, 0.2), 0 0 0 0 rgba(37, 99, 235, 0.2);
+            }
+
+            50% {
+                transform: translateY(-7px) scale(1.03);
+                box-shadow: 0 16px 36px rgba(30, 64, 175, 0.35), 0 0 22px 3px rgba(56, 189, 248, 0.4);
+            }
+        }
+
+        @keyframes kenBurns {
+            0% {
+                transform: scale(1) translate(0, 0);
+            }
+
+            50% {
+                transform: scale(1.22) translate(-3%, -3%);
+            }
+
+            100% {
+                transform: scale(1) translate(0, 0);
+            }
+        }
+
+        @keyframes shimmerSweep {
+            0% {
+                transform: translate(-100%, -100%) rotate(45deg);
+            }
+
+            30%,
+            100% {
+                transform: translate(100%, 100%) rotate(45deg);
+            }
+        }
+
+        .slide-category {
+            font-family: var(--font-code);
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--blue-primary);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .slide-category::before {
+            content: '';
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            background: var(--blue-primary);
+            border-radius: 50%;
+        }
+
+        .slide-title {
+            font-family: var(--font-head);
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            color: #0f172a;
+            margin-bottom: 14px;
+            letter-spacing: -0.02em;
+        }
+
+        .slide-subtitle {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            max-width: 1100px;
+            line-height: 1.55;
+        }
+
+        /* Glass / Light Cards & Grid Layouts */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(540px, 1fr));
+            gap: 28px;
+            margin-bottom: 28px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 24px;
+            margin-bottom: 28px;
+        }
+
+        .glass-card {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-glass);
+            border-radius: var(--radius-md);
+            padding: 30px;
+            transition: var(--transition);
+            position: relative;
+            box-shadow: var(--shadow-card);
+        }
+
+        .glass-card:hover {
+            border-color: #94a3b8;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .glass-card.highlight-cyan {
+            border-left: 6px solid var(--blue-primary);
+        }
+
+        .glass-card.highlight-magenta {
+            border-left: 6px solid var(--indigo-accent);
+        }
+
+        .glass-card.highlight-lime {
+            border-left: 6px solid var(--teal-accent);
+        }
+
+        .card-title {
+            font-family: var(--font-head);
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            line-height: 1.25;
+        }
+
+        .card-subtitle {
+            font-size: 1.05rem;
+            color: var(--blue-primary);
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .card-text {
+            font-size: 1.2rem;
+            line-height: 1.65;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+
+        .card-text strong {
+            color: #0f172a;
+            font-weight: 700;
+        }
+
+        /* Tags and Badges */
+        .tag-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 16px;
+        }
+
+        .tag {
+            font-family: var(--font-code);
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: 8px;
+            background: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            color: var(--text-muted);
+        }
+
+        .tag.cyan {
+            background: #eff6ff;
+            color: var(--blue-primary);
+            border-color: #bfdbfe;
+        }
+
+        .tag.magenta {
+            background: #eef2ff;
+            color: var(--indigo-accent);
+            border-color: #c7d2fe;
+        }
+
+        .tag.lime {
+            background: #ccfbf1;
+            color: var(--teal-accent);
+            border-color: #99f6e4;
+        }
+
+        /* Prompt Code Playgrounds (Dark slate for high contrast terminal feel) */
+        .prompt-box {
+            background: #0f172a;
+            border: 2px solid #334155;
+            border-radius: var(--radius-sm);
+            padding: 20px;
+            margin-top: 16px;
+            position: relative;
+            font-family: var(--font-code);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #f8fafc;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            box-shadow: 0 6px 16px rgba(15, 23, 42, 0.15);
+        }
+
+        .prompt-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #334155;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #38bdf8;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .btn-copy {
+            background: #0284c7;
+            border: none;
+            color: #ffffff;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-copy:hover {
+            background: #38bdf8;
+            color: #0f172a;
+        }
+
+        /* Tables & Data Comparisons */
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 16px;
+            font-size: 1.15rem;
+        }
+
+        .custom-table th {
+            background: #dbeafe;
+            color: var(--blue-primary);
+            font-family: var(--font-head);
+            font-weight: 800;
+            text-align: left;
+            padding: 14px 18px;
+            border-bottom: 2px solid var(--blue-primary);
+        }
+
+        .custom-table td {
+            padding: 14px 18px;
+            border-bottom: 1px solid #e2e8f0;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .custom-table tr:hover td {
+            background: #f8fafc;
+            color: var(--text-main);
+        }
+
+        /* Timeline & Progress Visuals */
+        .timeline {
+            position: relative;
+            padding-left: 24px;
+            border-left: 3px solid var(--blue-primary);
+            margin: 24px 0;
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 28px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -31px;
+            top: 4px;
+            width: 12px;
+            height: 12px;
+            background: #ffffff;
+            border: 3px solid var(--blue-primary);
+            border-radius: 50%;
+        }
+
+        .timeline-year {
+            font-family: var(--font-code);
+            font-weight: 800;
+            color: var(--blue-primary);
+            font-size: 1.15rem;
+            margin-bottom: 6px;
+        }
+
+        .timeline-content {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            line-height: 1.55;
+        }
+
+        /* Health vs Enterprise Callout Box */
+        .perspective-comparison {
+            background: #ffffff;
+            border: 2px solid #cbd5e1;
+            border-radius: var(--radius-md);
+            padding: 24px;
+            margin-top: 24px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            box-shadow: var(--shadow-card);
+        }
+
+        .perspective-box h4 {
+            font-family: var(--font-head);
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .perspective-box.general h4 {
+            color: var(--blue-primary);
+        }
+
+        .perspective-box.health h4 {
+            color: var(--teal-accent);
+        }
+
+        .perspective-box p {
+            font-size: 1.15rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* Slide Footer Bar (Present on every slide for design consistency) */
+        .slide-footer-bar {
+            margin-top: 40px;
+            padding-top: 18px;
+            border-top: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-family: var(--font-head);
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--blue-primary);
+        }
+
+        .slide-footer-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .slide-footer-presenter {
+            color: var(--text-main);
+            font-weight: 800;
+        }
+
+        /* Bottom Control Bar */
+        footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 65px;
+            background: #ffffff;
+            border-top: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 36px;
+            z-index: 100;
+            box-shadow: 0 -2px 10px rgba(15, 23, 42, 0.05);
+        }
+
+        .progress-bar-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: #e2e8f0;
+            pointer-events: none;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 10%;
+            background: linear-gradient(90deg, var(--blue-primary), var(--teal-accent));
+            transition: width 0.3s ease;
+        }
+
+        .footer-branding-text {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-head);
+            font-size: 1.15rem;
+            font-weight: 800;
+        }
+
+        .footer-hospital-label {
+            color: var(--blue-primary);
+        }
+
+        .footer-divider-label {
+            color: #cbd5e1;
+        }
+
+        .footer-presenter-label {
+            color: var(--text-main);
+        }
+
+        .nav-btn-group {
+            display: flex;
+            gap: 14px;
+            z-index: 105;
+        }
+
+        .btn-nav {
+            background: var(--blue-primary);
+            border: none;
+            color: #ffffff;
+            padding: 10px 26px;
+            border-radius: var(--radius-sm);
+            font-size: 1.15rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 12px rgba(30, 64, 175, 0.25);
+            user-select: none;
+        }
+
+        .btn-nav:hover {
+            background: var(--blue-hover);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 18px rgba(30, 64, 175, 0.35);
+        }
+
+        .btn-nav:active {
+            transform: translateY(0);
+        }
+
+        .btn-nav:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+            background: #cbd5e1 !important;
+            color: #64748b !important;
+            box-shadow: none !important;
+            transform: none !important;
+        }
+
+        /* Toast notification */
+        .toast {
+            position: fixed;
+            bottom: 85px;
+            right: 36px;
+            background: #0f172a;
+            color: #ffffff;
+            padding: 14px 24px;
+            border-radius: var(--radius-sm);
+            font-size: 1.1rem;
+            font-weight: 700;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.25);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: var(--transition);
+            z-index: 200;
+            border: 1px solid #334155;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* Quiz Inicial Button Style on Slide 1 */
+        .quiz-btn-hero {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #1e40af 0%, #2563eb 50%, #0d9488 100%);
+            color: #ffffff !important;
+            font-family: var(--font-head);
+            font-size: 1.45rem;
+            font-weight: 800;
+            padding: 14px 34px;
+            border-radius: 50px;
+            text-decoration: none;
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.35), 0 0 0 2px rgba(255, 255, 255, 0.8) inset;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            letter-spacing: -0.01em;
+            margin-top: 10px;
+            cursor: pointer;
+        }
+
+        .quiz-btn-hero:hover {
+            transform: translateY(-4px) scale(1.04);
+            box-shadow: 0 16px 40px rgba(37, 99, 235, 0.5), 0 0 22px rgba(13, 148, 136, 0.45);
+            background: linear-gradient(135deg, #1d4ed8 0%, #3b82f6 50%, #0f766e 100%);
+        }
+
+        .quiz-btn-hero .quiz-icon {
+            font-size: 1.6rem;
+        }
+
+        .quiz-btn-hero .quiz-badge {
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(4px);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            font-weight: 700;
+        }
+
+        /* Tooltip Component */
+        .tooltip-wrapper {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+
+        .tooltip-target {
+            color: var(--blue-primary);
+            font-weight: 700;
+            border-bottom: 2px dashed var(--blue-primary);
+            padding: 0 2px;
+            border-radius: 3px;
+            transition: var(--transition);
+        }
+
+        .tooltip-wrapper:hover .tooltip-target,
+        .tooltip-wrapper:focus .tooltip-target {
+            background: #eff6ff;
+            color: var(--blue-hover);
+            border-bottom-style: solid;
+        }
+
+        .tooltip-box {
+            position: absolute;
+            bottom: calc(100% + 10px);
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            width: 320px;
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 12px 16px;
+            border-radius: var(--radius-sm);
+            border: 1px solid #334155;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            font-weight: 400;
+            box-shadow: 0 10px 25px rgba(15, 23, 42, 0.25);
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1000;
+            text-align: left;
+            white-space: normal;
+        }
+
+        .tooltip-box strong {
+            color: #38bdf8;
+            font-weight: 700;
+        }
+
+        .tooltip-box::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 6px;
+            border-style: solid;
+            border-color: #0f172a transparent transparent transparent;
+        }
+
+        .tooltip-wrapper:hover .tooltip-box,
+        .tooltip-wrapper:focus .tooltip-box,
+        .tooltip-wrapper:focus-within .tooltip-box {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
 </head>
+
 <body>
 
-    <!-- Mobile Menu Toggle Button -->
-    <button class="menu-toggle" id="menu-toggle" aria-label="Abrir menú">
-        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-        </svg>
-    </button>
-
-    <div class="app-container">
-        
-        <!-- Navigation Sidebar -->
-        <aside class="sidebar" id="sidebar">
-            <div class="brand-section">
-                <img src="images/logo.png" alt="Hospital Metropolitano Logo" class="brand-logo" onerror="this.src='https://placehold.co/200x80/0b0f19/00f2ff?text=HOSPITAL'">
-                <div>
-                    <h1 class="brand-title">Hospital Metropolitano</h1>
-                    <span class="brand-subtitle" style="text-transform: none; letter-spacing: normal;">Seguridad de la Información y Ciberseguridad</span>
-                </div>
+    <!-- Header / Top Bar -->
+    <header>
+        <div class="brand-logo">
+            <img src="logo.png" alt="Hospital Metropolitano">
+            <div class="brand-text">
+                <span class="brand-title">Hospital Metropolitano</span>
+                <span class="brand-sub">Charla Agenda Abierta: Inteligencia Artificial</span>
             </div>
-            
-            <nav class="nav-menu" id="nav-menu">
-                <!-- Nav items generated dynamically by app.js -->
-            </nav>
+        </div>
+
+        <div class="nav-controls">
+            <button class="btn-action" id="btnToggleSidebar">
+                <span>📋 Índice</span>
+            </button>
+
+            <button class="btn-action" id="btnFullscreen">
+                <span>🖥️ Pantalla Completa</span>
+            </button>
+
+            <div class="slide-counter" id="slideCounter">Diapositiva 1 / 13</div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <div class="presentation-container">
+
+        <!-- Sidebar Index Drawer -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <span>Contenido de la Sesión</span>
+                <span style="font-size: 0.9rem; color: var(--blue-primary);">13 Módulos</span>
+            </div>
+            <ul class="slide-list" id="slideList">
+                <!-- Dynamically populated by JS -->
+            </ul>
         </aside>
 
-        <!-- Main Workspace -->
-        <main class="main-viewport" id="main-viewport">
-            <div class="slide-deck">
-                
-                <!-- Active slides loaded here dynamically -->
-                <div id="slide-deck" style="width: 100%; display: flex; flex-direction: column; flex: 1;"></div>
-                
-                <!-- Bottom controls -->
-                <div class="bottom-bar">
-                    <button class="btn-nav" id="btn-prev" aria-label="Diapositiva anterior" disabled>
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="15 18 9 12 15 6"></polyline>
-                        </svg>
-                    </button>
-                    
-                    <span class="progress-info" id="progress-info">Cargando...</span>
-                    
-                    <button class="btn-nav" id="btn-next" aria-label="Diapositiva siguiente">
-                        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="9 18 15 12 9 6"></polyline>
-                        </svg>
-                    </button>
+        <!-- Slide Stage -->
+        <main class="stage" id="stage">
+
+            <!-- Floating Navigation Buttons on Stage -->
+            <button class="stage-nav-btn prev" id="btnStagePrev" onclick="goToPrevSlide()"
+                title="Diapositiva Anterior (←)">‹</button>
+            <button class="stage-nav-btn next" id="btnStageNext" onclick="goToNextSlide()"
+                title="Diapositiva Siguiente (→)">›</button>
+
+            <!-- SLIDE 1: Portada Hero -->
+            <section class="slide active" data-title="Portada & Visión General">
+                <div class="slide-header"
+                    style="text-align: center; border: none; padding-top: 15px; flex-direction: column; align-items: center;">
+                    <div class="slide-media-container" style="width: 250px; height: 160px; margin-bottom: 20px;">
+                        <video src="images/6994181_Bot_Robot_1280x720.mp4" autoplay loop muted playsinline
+                            class="slide-media-video"></video>
+                    </div>
+                    <div class="slide-category" style="justify-content: center; font-size: 1.15rem;">HOSPITAL
+                        METROPOLITANO • CHARLA AGENDA ABIERTA 2026</div>
+                    <h1 class="slide-title"
+                        style="font-size: 3.8rem; color: var(--blue-primary); margin-bottom: 24px; font-weight: 900;">
+                        Inteligencia Artificial:<br>De la Teoría a la Práctica.
+                    </h1>
+                    <p style="font-size: 2.8rem; color: var(--blue-primary); margin-bottom: 15px; font-weight: 900;">
+                        Bonus Track: Prompting</p>
+
+                    <div style="margin-top: 14px; margin-bottom: 10px;">
+                        <a href="https://presenter.ahaslides.com/presentation/9952588?preview=true" target="_blank"
+                            rel="noopener noreferrer" class="quiz-btn-hero" title="Abrir Quiz Inicial AhaSlides">
+                            <span class="quiz-icon">📝</span>
+                            <span>Quiz Inicial Facilito !!</span>
+                            <span class="quiz-badge">AhaSlides ↗</span>
+                        </a>
+                    </div>
                 </div>
 
-            </div>
-        </main>
+                <div class="grid-3" style="margin-top: 20px;">
+                    <div class="glass-card highlight-cyan">
+                        <div class="card-subtitle">Fundamentos Técnicos</div>
+                        <div class="card-title">Taxonomía & Modelos</div>
+                        <p class="card-text">De la IA Estrecha (ANI) a la Inteligencia Agéntica. Redes neuronales
+                            profundas, <span class="tooltip-wrapper" tabindex="0"><span
+                                    class="tooltip-target">VAEs</span><span class="tooltip-box"><strong>VAEs
+                                        (Variational Autoencoders o Autoencoders Variacionales)</strong> son un tipo de
+                                    red neuronal profunda generativa que se utiliza para aprender representaciones
+                                    eficientes de los datos de manera no supervisada y generar datos nuevos similares a
+                                    los de entrenamiento.</span></span>, <span class="tooltip-wrapper"
+                                tabindex="0"><span class="tooltip-target">Modelos de Difusión</span><span
+                                    class="tooltip-box"><strong>Modelos de Difusión:</strong> Modelos generativos que
+                                    crean imágenes o datos nuevos eliminando ruido de forma iterativa a partir de
+                                    estática aleatoria.</span></span> y <span class="tooltip-wrapper" tabindex="0"><span
+                                    class="tooltip-target">Transformers</span><span
+                                    class="tooltip-box"><strong>Transformers:</strong> Arquitectura basada en atención
+                                    que procesa secuencias completas en paralelo, base de los modelos de lenguaje
+                                    modernos y la IA conversacional.</span></span>.</p>
+                        <div class="tag-group">
+                            <span class="tag cyan">ML / DL</span>
+                            <span class="tag cyan">GenAI</span>
+                            <span class="tag cyan">Agentic AI</span>
+                        </div>
+                    </div>
 
+                    <div class="glass-card highlight-magenta">
+                        <div class="card-subtitle">Ingeniería de Prompts</div>
+                        <div class="card-title">Modelos de Razonamiento</div>
+                        <p class="card-text">Dominio del razonamiento Inductivo, Deductivo y Abductivo para guiar LLMs
+                            hacia respuestas precisas sin alucinaciones.</p>
+                        <div class="tag-group">
+                            <span class="tag magenta">Inductivo</span>
+                            <span class="tag magenta">Deductivo</span>
+                            <span class="tag magenta">Abductivo</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-card highlight-lime">
+                        <div class="card-subtitle">Despliegue & Gobernanza</div>
+                        <div class="card-title">Infraestructura & Ética</div>
+                        <p class="card-text">Cloud vs Open Source (On-Premise), RAG, <span class="tooltip-wrapper"
+                                tabindex="0"><span class="tooltip-target">XAI</span><span
+                                    class="tooltip-box"><strong>XAI (Explicabilidad en IA):</strong> Conjunto de
+                                    técnicas y métodos diseñados para hacer que las decisiones y predicciones de los
+                                    modelos de inteligencia artificial sean transparentes y comprensibles para los
+                                    humanos, permitiendo auditar el razonamiento del sistema, cumplir con normativas
+                                    éticas y mitigar riesgos en entornos corporativos.</span></span> (Explicabilidad) y
+                            gestión de
+                            riesgos en datos y modelos.</p>
+                        <div class="tag-group">
+                            <span class="tag lime">Privacidad</span>
+                            <span class="tag lime">RAG</span>
+                            <span class="tag lime">Gobernanza</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 2: Taxonomía y Evolución de la IA -->
+            <section class="slide" data-title="1. Taxonomía y Evolución de la IA">
+                <div class="slide-header">
+                    <div class="slide-header-content">
+                        <div class="slide-category">CAPÍTULO 1</div>
+                        <h2 class="slide-title">Taxonomía y Evolución de la Inteligencia Artificial</h2>
+                        <p class="slide-subtitle">Categorización funcional del espectro cognitivo artificial y línea de
+                            tiempo evolutiva (1950 - 2026).</p>
+                    </div>
+                    <div class="slide-media-container" title="Taxonomía y Evolución">
+                        <img src="images/Taxomia.jpg" alt="Taxonomía y Evolución" class="slide-media-img">
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="glass-card highlight-cyan">
+                        <div class="card-title">Clasificación por Capacidad Cognitiva</div>
+                        <div class="card-text">
+                            <p style="margin-bottom: 14px;"><strong>• IA Estrecha o Débil (ANI):</strong> Diseñada para
+                                resolver una tarea específica con alta precisión. Dominante en la industria actual (ej.
+                                recomendadores, reconocimiento de voz, detección de fraudes).</p>
+                            <p style="margin-bottom: 14px;"><strong>• IA General (AGI):</strong> Concepto teórico donde
+                                la máquina igualaría la capacidad cognitiva humana flexible en cualquier dominio. (Aún
+                                inexistente).</p>
+                            <p style="margin-bottom: 14px;"><strong>• IA Agéntica (Agentic AI - 2026):</strong> Sistemas
+                                autónomos guiados por metas organizadas que ejecutan flujos complejos, toman decisiones
+                                dinámicas y coordinan múltiples sub-agentes.</p>
+                        </div>
+
+                        <div class="perspective-comparison">
+                            <div class="perspective-box general">
+                                <h4>🏢 Enfoque General / Empresa</h4>
+                                <p>Sistemas automatizados de soporte al cliente, análisis predictivo logístico y
+                                    automatización agéntica de tareas repetitivas.</p>
+                            </div>
+                            <div class="perspective-box health">
+                                <h4>🩺 En Salud</h4>
+                                <p>Algoritmos ANI para lectura de imagenes y detección de anomalías.
+                                </p>
+                                <p>Triaje automatizado en Urgencia.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="glass-card highlight-cyan">
+                        <div class="card-title"
+                            style="display: flex; justify-content: space-between; align-items: center;">
+                            <span>📜 Línea de Tiempo Histórica de la IA</span>
+                            <span class="tag cyan">1950 - 2026</span>
+                        </div>
+
+                        <div class="slide-media-container" title="Haga clic para ampliar la Línea de Tiempo"
+                            style="width: 100%; height: 180px; margin: 14px 0 20px 0; border-radius: 16px;">
+                            <img src="images/linea.jpg" alt="Línea de Tiempo Histórica de la IA" class="slide-media-img"
+                                onerror="this.onerror=null; this.src='images/linea.jpg';">
+                        </div>
+
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-year">1950 - <span class="tooltip-wrapper" tabindex="0"><span
+                                            class="tooltip-target">Test de Turing</span><span
+                                            class="tooltip-box"><strong>Test de Turing:</strong> Prueba clásica que
+                                            evalúa la capacidad de una máquina para exhibir un comportamiento
+                                            conversacional indistinguible del de un ser humano.</span></span> &
+                                    Dartmouth (1956)</div>
+                                <div class="timeline-content">Alan Turing plantea "¿Pueden pensar las máquinas?". John
+                                    McCarthy acuña el término "Inteligencia Artificial".</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-year">1967 - Perceptrón & Redes Neuronales</div>
+                                <div class="timeline-content">Frank Rosenblatt construye el Mark 1 Perceptrón. En los
+                                    años 80 se populariza el algoritmo de backpropagation.</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-year">1997 - 2016: Hitos de Aprendizaje Profundo</div>
+                                <div class="timeline-content">Deep Blue vence a Kasparov (1997), <span
+                                        class="tooltip-wrapper" tabindex="0"><span class="tooltip-target">IBM Watson
+                                            gana Jeopardy! (2011)</span><span class="tooltip-box"
+                                            style="width: 380px;"><strong>IBM Watson en Jeopardy!
+                                                (2011)</strong><br>Hito histórico donde el supercomputador de IBM
+                                            derrotó a los dos campeones humanos más exitosos del programa (Ken Jennings
+                                            y Brad Rutter) en un enfrentamiento de preguntas y
+                                            respuestas.<br><br><strong>Dinámica única:</strong> A diferencia de otros
+                                            concursos donde se responden preguntas directas, en Jeopardy! los
+                                            participantes reciben una respuesta o pista en forma de afirmación y deben
+                                            formular su contestación estrictamente en forma de
+                                            pregunta.<br><br><strong>Capacidad clave:</strong> Demostró el poder del
+                                            procesamiento de lenguaje natural avanzado y la recuperación de información
+                                            a escala masiva.<br><br><strong>Funcionamiento:</strong> Analizó pistas
+                                            complejas, dobles sentidos, ironías y chistes en milisegundos consultando
+                                            millones de documentos estructurados y no estructurados de forma
+                                            simultánea.<br><br><strong>Relevancia:</strong> Marcó la transición de la IA
+                                            desde sistemas analíticos rígidos hacia herramientas capaces de interpretar
+                                            el conocimiento humano contextualizado.</span></span> y AlphaGo vence al
+                                    campeón mundial de Go (2016).</div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-year">2022 - 2026: Era GenAI y Agentes Autónomos</div>
+                                <div class="timeline-content">Irrupción de LLMs (ChatGPT, GPT-4, Llama, watsonx) y
+                                    evolución hacia sistemas multimodales y Agentic AI.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 3: Paradigmas de Aprendizaje Algorítmico -->
+            <section class="slide" data-title="2. Paradigmas de Aprendizaje Algorítmico">
+                <div class="slide-header">
+                    <div class="slide-header-content">
+                        <div class="slide-category">CAPÍTULO 2</div>
+                        <h2 class="slide-title">Paradigmas de Aprendizaje Algorítmico</h2>
+                        <p class="slide-subtitle">Comparativa entre aprendizaje Supervisado, No Supervisado,
+                            Autosupervisado
+                            y Por Refuerzo.</p>
+                    </div>
+                    <div class="slide-media-container" title="Paradigmas de Aprendizaje">
+                        <img src="images/balanza.jpg" alt="Paradigmas de Aprendizaje" class="slide-media-img">
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="glass-card highlight-cyan">
+                        <div class="card-subtitle">APRENDIZAJE SUPERVISADO</div>
+                        <div class="card-title">Entrenamiento con Datos Etiquetados</div>
+                        <p class="card-text">
+                            El algoritmo aprende la relación entre pares de datos de entrada y etiquetas de salida
+                            proporcionadas por expertos humanos.
+                        </p>
+                        <ul style="margin-left: 24px; color: var(--text-muted); font-size: 1.15rem; line-height: 1.65;">
+                            <li style="margin-bottom: 8px;"><strong>Objetivo:</strong> Clasificación y Regresión
+                                predictiva.</li>
+                            <li style="margin-bottom: 8px;"><strong>Ejemplo General:</strong> Predicción de deserción de
+                                clientes o detección de transacciones bancarias fraudulentas.</li>
+                            <li style="margin-bottom: 8px;"><strong>Ejemplo Salud:</strong> Entrenamiento con imágenes
+                                etiquetadas previamente como "Neumonía" o "Sano".</li>
+                        </ul>
+                    </div>
+
+                    <div class="glass-card highlight-magenta">
+                        <div class="card-subtitle">APRENDIZAJE NO SUPERVISADO</div>
+                        <div class="card-title">Descubrimiento de Patrones Ocultos</div>
+                        <p class="card-text">
+                            El sistema analiza datos sin etiquetar para agrupar (clustering) o reducir la
+                            dimensionalidad descubriendo estructuras intrínsecas.
+                        </p>
+                        <ul style="margin-left: 24px; color: var(--text-muted); font-size: 1.15rem; line-height: 1.65;">
+                            <li style="margin-bottom: 8px;"><strong>Objetivo:</strong> Agrupamiento y asociación de
+                                datos no estructurados.</li>
+                            <li style="margin-bottom: 8px;"><strong>Ejemplo General:</strong> Segmentación de hábitos de
+                                compra de clientes en e-commerce.</li>
+                            <li style="margin-bottom: 8px;"><strong>Ejemplo Salud:</strong> Identificación de nuevos
+                                subtipos de enfermedades o patrones crónicos de pacientes.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="glass-card highlight-lime">
+                    <div class="card-title">Paradigmas Avanzados: Autosupervisado y Reinforcement Learning (RLHF)</div>
+                    <div class="grid-2" style="margin-bottom: 0;">
+                        <div>
+                            <p class="card-text"><strong>• Aprendizaje Autosupervisado:</strong> Genera etiquetas
+                                implícitas a partir de la estructura del dato (ej. predecir la siguiente palabra en un
+                                texto masivo), base fundamental de los LLMs.</p>
+                        </div>
+                        <div>
+                            <p class="card-text"><strong>• RLHF (Aprendizaje por Refuerzo con Feedback Humano):</strong>
+                                Optimiza el comportamiento del modelo mediante funciones de recompensa y correcciones
+                                directas de evaluadores humanos.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 4: Arquitecturas, Redes Neuronales y Métricas -->
+            <section class="slide" data-title="3. Arquitecturas y Métricas de Rendimiento">
+                <div class="slide-header">
+                    <div class="slide-header-content">
+                        <div class="slide-category">CAPÍTULO 3</div>
+                        <h2 class="slide-title">Arquitecturas Internas, Redes Neuronales y Métricas</h2>
+                        <p class="slide-subtitle">Del procesamiento multicapa al control de sobreajuste (overfitting) en
+                            modelos de producción.</p>
+                    </div>
+                    <div class="slide-media-container" title="Redes Neuronales">
+                        <img src="images/redes_neronales.jpg" alt="Redes Neuronales" class="slide-media-img">
+                    </div>
+                </div>
+
+                <div class="grid-3">
+                    <div class="glass-card">
+                        <div class="card-title">🧠 Redes Neuronales Profundas</div>
+                        <p class="card-text">Modeladas vagamente en la estructura biológica. Compuestas por capas de
+                            entrada, múltiples capas ocultas (Hidden Layers) y capas de salida que ajustan pesos
+                            numéricos de forma ponderada.</p>
+                        <span class="tag cyan">Visión por Computador / Ponderación</span>
+                    </div>
+
+                    <div class="glass-card">
+                        <div class="card-title">🌳 Árboles y Reglas Lógicas</div>
+                        <p class="card-text">Estructuras lógicas transparentes e interpretables basadas en condiciones
+                            "si/entonces". Ideales para procesos normativos, reglas financieras y flujos de trabajo
+                            rígidos.</p>
+                        <span class="tag lime">Algoritmos Transparentes / Explicables</span>
+                    </div>
+
+                    <div class="glass-card highlight-magenta">
+                        <div class="card-title">⚠️ Sobreajuste (Overfitting)</div>
+                        <p class="card-text">Ocurre cuando el modelo "memoriza" el ruido y detalles específicos de los
+                            datos de entrenamiento en lugar de aprender la tendencia general, fallando estrepitosamente
+                            con datos nuevos.</p>
+                        <div
+                            style="background: #fef2f2; border-left: 3.5px solid #e11d48; padding: 8px 14px; border-radius: 8px; margin: 10px 0; font-size: 1.05rem; color: #9f1239; font-weight: 600;">
+                            💡 <strong>Nota:</strong> <em>Irónicamente aplica a humanos perfectamente.</em>
+                        </div>
+                        <span class="tag magenta">Memorización vs Generalización</span>
+                    </div>
+                </div>
+
+                <div class="glass-card highlight-cyan">
+                    <div class="card-title">🌐 Redes Neuronales: Interacción Gráfica & Motor Oculto</div>
+                    <p class="card-text">
+                        Para comprender la lógica interna de los algoritmos sin "cajas negras", la herramienta visual e
+                        interactiva de MLU-Explain permite observar cómo las entradas (variables explicativas) se
+                        combinan a través de capas ocultas (Hidden Layers), ajustando dinámicamente sus pesos numéricos
+                        para separar estados o predecir patrones en un plano multidimensional.
+                    </p>
+                    <div
+                        style="background: #eff6ff; border: 2px solid #bfdbfe; border-radius: var(--radius-sm); padding: 20px; margin-top: 16px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+                        <div>
+                            <div
+                                style="font-family: var(--font-head); font-weight: 800; font-size: 1.2rem; color: var(--blue-primary); margin-bottom: 4px;">
+                                Visualización Interactiva en Tiempo Real
+                            </div>
+                            <div style="font-size: 1.05rem; color: var(--text-muted);">
+                                Laboratorio interactivo para explorar capas neuronales, funciones de activación y
+                                convergencia de pesos.
+                            </div>
+                        </div>
+                        <a href="https://mlu-explain.github.io/neural-networks/" target="_blank"
+                            rel="noopener noreferrer" style="text-decoration: none;">
+                            <button class="btn-nav"
+                                style="font-size: 1.1rem; padding: 12px 24px; display: flex; align-items: center; gap: 8px;">
+                                🔗 Abrir MLU-Explain Neural Networks ↗
+                            </button>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 5: Generación, LLMs e Infraestructura -->
+            <section class="slide" data-title="4. LLMs, RAG e Infraestructura">
+                <div class="slide-header">
+                    <div class="slide-header-content">
+                        <div class="slide-category">CAPÍTULO 4</div>
+                        <h2 class="slide-title">Grandes Modelos de Lenguaje (LLMs) e Infraestructura</h2>
+                        <p class="slide-subtitle">Ciclo de vida generativo (Training, Tuning, RAG) y dilema Cloud vs
+                            Open-Source On-Premise.</p>
+                    </div>
+                    <div class="slide-media-container" title="LLMs e Infraestructura">
+                        <img src="images/ai-fails-7-20250401.jpg" alt="LLMs e Infraestructura" class="slide-media-img">
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="glass-card highlight-cyan">
+                        <div class="card-title">Ciclo de Vida de la IA Generativa</div>
+                        <p class="card-text"><strong>1. Entrenamiento (Pre-training):</strong> Creación del Modelo Base
+                            (Foundation Model) procesando terabytes de datos no estructurados con alta demanda de GPUs.
+                        </p>
+                        <p class="card-text"><strong>2. Ajuste Fino (Tuning & Fine-Tuning):</strong> Adaptación del
+                            modelo base mediante instrucciones etiquetadas específicas o RLHF.</p>
+                        <p class="card-text"><strong>3. Generación Aumentada por Recuperación (RAG):</strong> Conexión
+                            dinámica del modelo con fuentes de conocimiento externas en tiempo real para evitar
+                            alucinaciones y garantizar actualidad.</p>
+                        <div
+                            style="background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: var(--radius-sm); padding: 14px 18px; margin-top: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+                            <div>
+                                <div style="font-weight: 800; color: var(--blue-primary); font-size: 1.05rem;">Ejemplo
+                                    Real de RAG en HOSMET</div>
+                                <div style="font-size: 0.95rem; color: var(--text-muted);">Plataforma de consulta
+                                    documental interactiva con recuperación de conocimiento.</div>
+                            </div>
+                            <a href="https://deskcl.femantech.cl/deskcl/" target="_blank" rel="noopener noreferrer"
+                                style="text-decoration: none;">
+                                <button class="btn-nav"
+                                    style="font-size: 0.95rem; padding: 8px 16px; display: flex; align-items: center; gap: 6px;">
+                                    🔗 Ver RAG HOSMET ↗
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="glass-card">
+                        <div class="card-title">Conceptos Clave de Operación en LLMs</div>
+                        <div style="margin-bottom: 14px; font-size: 1.15rem; line-height: 1.6;">
+                            <strong style="color: var(--blue-primary);">• Tokens:</strong> Unidades mínimas de texto
+                            (subpalabras o caracteres) en las que se descompone la información.
+                        </div>
+                        <div style="margin-bottom: 14px; font-size: 1.15rem; line-height: 1.6;">
+                            <strong style="color: var(--indigo-accent);">• Alucinaciones:</strong> Respuestas plausibles
+                            y convincentes pero erróneas o inventadas por el modelo. Requieren validación constante.
+                        </div>
+                        <div style="margin-bottom: 14px; font-size: 1.15rem; line-height: 1.6;">
+                            <strong style="color: var(--teal-accent);">• Temperatura:</strong> Parámetro que controla la
+                            aleatoriedad y creatividad del texto generado (0.0 para respuestas analíticas rígidas, 0.8+
+                            para respuestas creativas).
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card highlight-lime">
+                    <div class="card-title">Matriz de Decisión de Infraestructura: Cloud vs Open Source / On-Premise
+                    </div>
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Dimensión</th>
+                                <th>Modelos en la Nube (Vertex AI, OpenAI, watsonx)</th>
+                                <th>Modelos Open Source / On-Premise (DeepSeek, Qwen, Llama 3)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Privacidad & Soberanía</strong></td>
+                                <td>Requiere acuerdos estrictos de confidencialidad y cumplimiento (GDPR / HIPAA).</td>
+                                <td>Máxima privacidad. Se instalan en servidores locales sin salida de datos.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Costos & Escalabilidad</strong></td>
+                                <td>Pago por uso (tokens). Escalabilidad inmediata sin inversión en hardware.</td>
+                                <td>Inversión inicial en infraestructura GPU local. Costo marginal cero por token.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Personalización</strong></td>
+                                <td>Limitada a parámetros expuestos por API y Fine-Tuning hospedado.</td>
+                                <td>Acceso total a los pesos del modelo para modificaciones profundas.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SLIDE 6: Arquitectura Maestra de Prompt Engineering -->
+            <section class="slide" data-title="5. Arquitectura Maestra de Prompt Engineering">
+                <div class="slide-header">
+                    <div class="slide-header-content">
+                        <div class="slide-category">CAPÍTULO 5</div>
+                        <h2 class="slide-title">Arquitectura Maestra de Prompt Engineering</h2>
+                        <p class="slide-subtitle">Estructura profesional en 5 bloques obligatorios para maximizar la
+                            calidad
+                            y precisión de la IA.</p>
+                    </div>
+                    <div class="slide-media-container" title="Prompt Engineering Generativo">
+                        <img src="images/jbooba-ai-generated-8637800.jpg" alt="Prompt Engineering Generativo"
+                            class="slide-media-img">
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="glass-card highlight-cyan">
+                        <div class="card-title">Los 5 Bloques del Prompt Profesional</div>
+                        <div style="font-size: 1.15rem; line-height: 1.65; color: var(--text-muted);">
+                            <p style="margin-bottom: 10px;"><strong style="color: var(--blue-primary);">1. Definición
+                                    Clara del Rol:</strong> Establece la perspectiva ("Actúa como un experto analista de
+                                marketing...", "Eres un auditor financiero...").</p>
+                            <p style="margin-bottom: 10px;"><strong style="color: var(--blue-primary);">2. Contexto
+                                    Detallado:</strong> Proporciona antecedentes relevantes ("Estás preparando el
+                                informe trimestral para la mesa directiva...").</p>
+                            <p style="margin-bottom: 10px;"><strong style="color: var(--blue-primary);">3. Instrucción
+                                    Precisa:</strong> Verbos de acción directos ("Analiza", "Sintetiza", "Genera")
+                                especificando tono y extensión.</p>
+                            <p style="margin-bottom: 10px;"><strong style="color: var(--blue-primary);">4. Restricciones
+                                    Explícitas:</strong> Limita el alcance ("No uses jerga técnica sin explicar", "Evita
+                                especulaciones", "Mantén el texto bajo 200 palabras").</p>
+                            <p style="margin-bottom: 10px;"><strong style="color: var(--blue-primary);">5. Formato &
+                                    Ejemplos (Few-Shot):</strong> Define la salida esperada (tablas, JSON, viñetas) y
+                                muestra un ejemplo del resultado deseado.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card">
+                        <div class="card-title">Plantilla General de Prompt Estructurado</div>
+                        <div class="prompt-box">
+                            <div class="prompt-header">
+                                <span>PLANTILLA MAESTRA DE PROMPT</span>
+                                <button class="btn-copy" onclick="copyPrompt('promptTemplate')">Copiar Prompt</button>
+                            </div>
+                            <code id="promptTemplate">Actúa como [ROL PROFESIONAL]. 
+Contexto: [DESCRIPCIÓN DETALLADA DEL ESCENARIO Y ANTECEDENTES].
+
+Instrucciones:
+1. [ACCIÓN 1 CON VERBO CLARO]
+2. [ACCIÓN 2 CON DETALLE DE ANÁLISIS]
+3. [ACCIÓN 3 CON SOLICITUD DE RECOMENDACIÓN]
+
+Restricciones:
+- Tono: [FORMAL / EJECUTIVO / PERSUASIVO]
+- Extensión máxima: [NÚMERO DE PALABRAS O PUNTOS CLAVE]
+- Excluir: [ELEMENTOS A EVITAR]
+
+Formato de Salida:
+Presenta el resultado estructurado en [TABLA / LISTA CON VIÑETAS / JSON] siguiendo el siguiente ejemplo:
+[EJEMPLO DE MUESTRA]</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div
+                    style="background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: var(--radius-sm); padding: 16px 22px; margin-top: 10px; display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; box-shadow: var(--shadow-card);">
+                    <div style="display: flex; align-items: center; gap: 14px;">
+                        <span style="font-size: 1.8rem;">📊</span>
+                        <div>
+                            <div style="font-weight: 800; color: var(--blue-primary); font-size: 1.15rem;">Ejemplo de
+                                Carga de datos JSON</div>
+                            <div style="font-size: 0.98rem; color: var(--text-muted); font-weight: 500;">Planilla
+                                interactiva de Google Sheets con dataset y estructura para importación de datos.</div>
+                        </div>
+                    </div>
+                    <a href="https://docs.google.com/spreadsheets/d/1j9VP98KJZDvsPtmZ91Vzt5rtbaFMIx2yg434NzXzJhU/edit?usp=sharing"
+                        target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+                        <button class="btn-nav"
+                            style="font-size: 1rem; padding: 10px 20px; display: flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #1e40af, #0f766e); border: none; border-radius: 8px; color: #ffffff; font-weight: 800; cursor: pointer; transition: var(--transition);">
+                            <span>Ejemplo de Carga de datos JSON</span> ↗
+                        </button>
+                    </a>
+                </div>
+            </section>
+
+            <!-- SLIDE 7: Modelos de Razonamiento en Prompting -->
+            <section class="slide" data-title="6. Razonamiento en Prompts (Inductivo, Deductivo, Abductivo)">
+                <div class="slide-header">
+                    <div class="slide-header-content">
+                        <div class="slide-category">CAPÍTULO 6</div>
+                        <h2 class="slide-title">Modelos de Razonamiento Aplicados a Prompts</h2>
+                        <p class="slide-subtitle">Guía para inducir patrones, deducir conclusiones necesarias o abducir
+                            explicaciones plausibles.</p>
+                    </div>
+                    <div class="slide-media-container" title="Razonamiento & Inteligencia Artificial">
+                        <video src="images/6994092_Dog_Cyberpunk_1280x720.mp4" autoplay loop muted playsinline
+                            class="slide-media-video"></video>
+                    </div>
+                </div>
+
+                <div class="grid-3">
+                    <div class="glass-card highlight-cyan">
+                        <div class="card-subtitle">1. RAZONAMIENTO INDUCTIVO</div>
+                        <div class="card-title">De lo Específico a lo General</div>
+                        <p class="card-text">Se proporcionan múltiples observaciones específicas para que la IA
+                            identifique un patrón común y derive una generalización probabilística.</p>
+                        <div class="prompt-box">
+                            <div class="prompt-header">
+                                <span>PROMPT INDUCTIVO</span>
+                                <button class="btn-copy" onclick="copyPrompt('promptInductive')">Copiar</button>
+                            </div>
+                            <code
+                                id="promptInductive">Observa los siguientes datos de ventas:
+1. En invierno, la venta de chaquetas aumenta un 40%.
+2. En verano, la venta de helados sube un 60%.
+3. En otoño, la venta de paraguas se duplica.
+
+Pregunta: ¿Qué conclusión o tendencia general puedes inferir sobre la relación entre el clima estacional y el comportamiento de compra de los consumidores?</code>
+                        </div>
+                    </div>
+
+                    <div class="glass-card highlight-lime">
+                        <div class="card-subtitle">2. RAZONAMIENTO DEDUCTIVO</div>
+                        <div class="card-title">De la Regla al Caso Particular</div>
+                        <p class="card-text">Parte de premisas o reglas generales comprobadas para aplicar lógica
+                            estricta y obtener una conclusión necesaria e ineludible.</p>
+                        <div class="prompt-box">
+                            <div class="prompt-header">
+                                <span>PROMPT DEDUCTIVO</span>
+                                <button class="btn-copy" onclick="copyPrompt('promptDeductive')">Copiar</button>
+                            </div>
+                            <code
+                                id="promptDeductive">Dada la regla general de la empresa:
+"Todos los contratos de consultoría superiores a $50,000 USD requieren la firma del Director de Finanzas."
+
+Y el caso particular:
+"El contrato con la empresa TechCorp es de $75,000 USD y fue firmado únicamente por el Gerente de Proyectos."
+
+Pregunta: ¿Cuál es la conclusión lógica que se deriva respecto al estado de validez institucional de dicho contrato?</code>
+                        </div>
+                    </div>
+
+                    <div class="glass-card highlight-magenta">
+                        <div class="card-subtitle">3. RAZONAMIENTO ABDUCTIVO</div>
+                        <div class="card-title">De la Observación a la Mejor Explicación</div>
+                        <p class="card-text">Ante un hecho sorprendente o información incompleta, pide a la IA evaluar
+                            hipótesis y seleccionar la causa más plausible.</p>
+                        <div class="prompt-box">
+                            <div class="prompt-header">
+                                <span>PROMPT ABDUCTIVO</span>
+                                <button class="btn-copy" onclick="copyPrompt('promptAbductive')">Copiar</button>
+                            </div>
+                            <code
+                                id="promptAbductive">Observa el siguiente hecho sorprendente:
+"La alarma de seguridad de la sucursal central se activó anoche a las 02:00 AM, pero los guardias no encontraron signos de robo ni accesos forzados."
+
+Instrucción: Genera 3 hipótesis posibles ordenadas de mayor a menor plausibilidad y selecciona la mejor explicación fundamentando tu respuesta.</code>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="perspective-comparison">
+                    <div class="perspective-box general">
+                        <h4>🏢 Aplicación General en Negocios</h4>
+                        <p>El razonamiento abductivo permite analizar caídas repentinas en servidores, fallas de
+                            inventario imprevistas o comportamientos atípicos en el mercado.</p>
+                    </div>
+                    <div class="perspective-box health">
+                        <h4>🩺 En Salud: Diagnóstico Diferencial</h4>
+                        <p>El diagnóstico diferencial es el clásico razonamiento abductivo médico: ante un conjunto de
+                            síntomas (fiebre, tos, disnea), el médico genera hipótesis (neumonía, COVID-19, bronquitis),
+                            evalúa la plausibilidad con exámenes y selecciona la causa más probable.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 8: Prompts Complejos para Análisis de Datos y Negocios -->
+            <section class="slide" data-title="7. Casos Prácticos de Prompting con Datos">
+                <div class="slide-header">
+                    <div class="slide-header-content">
+                        <div class="slide-category">CAPÍTULO 7</div>
+                        <h2 class="slide-title">Prompts Complejos de Análisis de Datos y Conclusiones No Solicitadas
+                        </h2>
+                        <p class="slide-subtitle">Técnicas avanzadas para solicitar análisis financiero, servicio al
+                            cliente
+                            y hallazgos proactivos.</p>
+                    </div>
+                    <div class="slide-media-container" title="Análisis de Datos & Experiencia">
+                        <video src="images/6994283_Lollipop_Lollypop_1280x720.mp4" autoplay loop muted playsinline
+                            class="slide-media-video"></video>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="glass-card highlight-cyan">
+                        <div class="card-title">Ejemplo 1: Análisis Presupuestario Gubernamental / Financiero</div>
+                        <p class="card-text">Solicitud de evaluación de ejecución de presupuesto solicitando
+                            explícitamente conclusiones no pedidas para descubrir ineficiencias ocultas.</p>
+                        <div class="prompt-box">
+                            <div class="prompt-header">
+                                <span>PROMPT FINANCIERO / PRESUPUESTARIO</span>
+                                <button class="btn-copy" onclick="copyPrompt('promptFinancial')">Copiar</button>
+                            </div>
+                            <code
+                                id="promptFinancial">Rol: Actúa como un analista financiero especializado en contabilidad y ejecución presupuestaria.
+
+Contexto: Analiza la siguiente ejecución presupuestaria del primer semestre 2024 (en CLP):
+- Personal: Asignado $1.500M, Realizado $1.200M (80%)
+- Bienes y Servicios: Asignado $500M, Realizado $450M (90%)
+- Transferencias Corrientes: Asignado $800M, Realizado $700M (87.5%)
+- Inversión: Asignado $300M, Realizado $150M (50%)
+
+Instrucción:
+1. Evalúa el porcentaje global de ejecución.
+2. Identifica las categorías de mayor y menor ejecución.
+3. Genera conclusiones y recomendaciones NO solicitadas basadas en tu análisis experto sobre la gestión de fondos públicos.
+
+Formato: Presenta una síntesis ejecutiva con una tabla comparativa y un apartado final denominado "Hallazgos Ocultos y Recomendaciones Proactivas".</code>
+                        </div>
+                    </div>
+
+                    <div class="glass-card highlight-magenta">
+                        <div class="card-title">Ejemplo 2: Clasificación de Sentimiento y Atención al Cliente</div>
+                        <p class="card-text">Prompt multi-paso para calificar correos de clientes descontentos y
+                            redactar respuestas empáticas de resolución.</p>
+                        <div class="prompt-box">
+                            <div class="prompt-header">
+                                <span>PROMPT DE ATENCIÓN AL CLIENTE</span>
+                                <button class="btn-copy" onclick="copyPrompt('promptCustomer')">Copiar</button>
+                            </div>
+                            <code id="promptCustomer">Rol: Actúa como analista de sentimiento y redactor sénior de servicio al cliente.
+
+Contexto: Analiza el siguiente correo electrónico enviado por un cliente insatisfecho con el retraso en la entrega de su pedido de software empresarial:
+
+"Estimados, necesito una explicación urgente. Llevamos dos semanas esperando las licencias de nuestro nuevo software empresarial y el sistema de gestión sigue bloqueado sin poder operar con normalidad. Esto nos está generando pérdidas operativas graves con nuestros propios clientes. Exijo una solución inmediata o evaluaremos cancelar el contrato."
+
+Instrucciones:
+
+Clasifica el sentimiento del correo (Positivo, Negativo, Neutral) y asigna un nivel de urgencia del 1 al 5.
+
+Extrae los 2 puntos clave del reclamo.
+
+Redacta una respuesta empática y profesional proponiendo una compensación adecuada (extensión de soporte o descuento).
+
+El tono debe ser highly profesional, amigable y resolutivo.</code>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 9: Formatos de Salida Avanzados -->
+            <section class="slide" data-title="8. Formatos de Salida Avanzados">
+                <div class="slide-header">
+                    <div class="slide-header-content">
+                        <div class="slide-category">CAPÍTULO 8</div>
+                        <h2 class="slide-title">Formatos de Salida Avanzados: JSON, Tablas, Google Sheets y Diagramas
+                        </h2>
+                        <p class="slide-subtitle">Instrucciones precisas para obtener datos estructurados en JSON,
+                            exportables a Google Sheets/Excel y código para diagramas visuales.</p>
+                    </div>
+                    <div class="slide-media-container" title="Formatos de Salida Estructurados">
+                        <img src="images/650_1200.png" alt="Formatos de Salida Estructurados" class="slide-media-img">
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="glass-card highlight-cyan">
+                        <div class="card-title">📄 Formato JSON Estructurado & Google Sheets</div>
+                        <p class="card-text">Para integrar respuestas de la IA directamente en sistemas,
+                            automatizaciones o planillas de <strong>Google Sheets / Excel</strong>, exige explícitamente
+                            objetos JSON o bloques CSV/TSV delimitados.</p>
+
+                        <div class="prompt-box">
+                            <div class="prompt-header">
+                                <span>PROMPT JSON & IMPORTACIÓN A GOOGLE SHEETS</span>
+                                <button class="btn-copy" onclick="copyPrompt('promptJSONGoogleSheets')">Copiar
+                                    Prompt</button>
+                            </div>
+                            <code id="promptJSONGoogleSheets">Actúa como analista de datos de gestión clínica y administrativa.
+
+Contexto: Necesito procesar una lista de pacientes para importación directa en Google Sheets.
+
+Instrucción:
+1. Genera una estructura en formato JSON estricto con los campos: "id_paciente", "cama", "diagnostico", "nivel_riesgo", "pas_mmHg", "fr_rpm". (10 registros)
+2. Proporciona inmediatamente abajo el mismo conjunto de datos formateado en código CSV (separado por comas) listo para copiar y pegar en Google Sheets (usando la función Datos > Dividir texto en columnas).
+
+Ejemplo de datos a generar: 3 registros sintéticos de pacientes en Sala de Medicina.</code>
+                        </div>
+
+                        <div
+                            style="background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: var(--radius-sm); padding: 14px 18px; margin-top: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+                            <div>
+                                <div style="font-weight: 800; color: var(--blue-primary); font-size: 1.05rem;">📊
+                                    Plantilla de Importación en Google Sheets</div>
+                                <div style="font-size: 0.95rem; color: var(--text-muted);">Planilla donde se importa
+                                    directamente el resultado JSON / CSV de este prompt.</div>
+                            </div>
+                            <a href="https://docs.google.com/spreadsheets/d/1j9VP98KJZDvsPtmZ91Vzt5rtbaFMIx2yg434NzXzJhU/edit?usp=drive_link"
+                                target="_blank" rel="noopener noreferrer" style="text-decoration: none;">
+                                <button class="btn-nav"
+                                    style="font-size: 0.95rem; padding: 8px 16px; display: flex; align-items: center; gap: 6px;">
+                                    🔗 Abrir Google Sheets ↗
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="glass-card">
+                        <div class="card-title">📊 Formatos Visuales y Diagramas (PlantUML / Mermaid)</div>
+                        <p class="card-text">Para integrar respuestas en herramientas como PlantUML, Mermaid.live o
+                            Markmap.js, debes requerir explícitamente el bloque de código respetando la sintaxis del
+                            lenguaje.</p>
+
+                        <div class="prompt-box">
+                            <div class="prompt-header">
+                                <span>PROMPT DE DIAGRAMA PLANTUML</span>
+                                <button class="btn-copy" onclick="copyPrompt('promptPlantUML')">Copiar Prompt</button>
+                            </div>
+                            <code id="promptPlantUML">Genera la estructura de un diagrama de clases en formato PlantUML para un sistema de gestión empresarial:
+
+```plantuml
+@startuml
+class Auto {
+  +String marca
+  +String modelo
+  +void arrancar()
+}
+class Motor {
+  +String tipo
+  +void encender()
+}
+Auto *-- Motor
+@enduml
+```
+
+Solicita únicamente el bloque de código ejecutable listo para renderizar en PlantUML Online.</code>
+                        </div>
+
+                        <div
+                            style="background: #eff6ff; border: 1.5px solid #bfdbfe; border-radius: var(--radius-sm); padding: 14px 18px; margin-top: 14px; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;">
+                            <div>
+                                <div style="font-weight: 800; color: var(--blue-primary); font-size: 1.05rem;">📐 Editor
+                                    PlantUML en Línea</div>
+                                <div style="font-size: 0.95rem; color: var(--text-muted);">Generar y renderizar
+                                    diagramas UML con IA en ProcessOn.</div>
+                            </div>
+                            <a href="https://www.processon.io/es/plantuml" target="_blank" rel="noopener noreferrer"
+                                style="text-decoration: none;">
+                                <button class="btn-nav"
+                                    style="font-size: 0.95rem; padding: 8px 16px; display: flex; align-items: center; gap: 6px;">
+                                    🔗 ProcessOn PlantUML ↗
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="glass-card highlight-lime" style="margin-top: 10px;">
+                    <div class="card-title">Resumen de Instrucciones de Formato de Salida</div>
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>Tipo de Salida</th>
+                                <th>Instrucción de Prompt a Incluir</th>
+                                <th>Aplicación / Herramienta Destino</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Formato JSON Estructurado</strong></td>
+                                <td>"Genera la respuesta exclusivamente en un objeto JSON válido con la estructura
+                                    `{"pacientes": [...]}`."</td>
+                                <td>APIs, Scripts de Python, Google Apps Script.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Google Sheets / Excel (CSV)</strong></td>
+                                <td>"Entrega el resultado en formato de texto plano CSV separado por comas (o
+                                    tabulaciones TSV) para importar en planillas."</td>
+                                <td>Google Sheets (`IMPORTDATA`), Microsoft Excel.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Tablas Markdown</strong></td>
+                                <td>"Muéstrame el resultado en una tabla Markdown con encabezados `| Columna 1 | Columna
+                                    2 |`."</td>
+                                <td>Informes ejecutivos, Notion, GitHub Docs.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Diagramas Dirigidos (PlantUML / Mermaid)</strong></td>
+                                <td>"Escribe únicamente el bloque de código ejecutable en sintaxis PlantUML `@startuml
+                                    ... @enduml` o Mermaid."</td>
+                                <td>PlantUML Online, Mermaid.live.</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Mapas Mentales (Markmap)</strong></td>
+                                <td>"Genera una estructura de árbol jerárquico compatible con markmap.js usando sangrías
+                                    Markdown."</td>
+                                <td>Markmap.js visualizer.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- SLIDE 10: Caso Práctico 2 – Alerta Temprana de Deterioro Clínico y Gestión de Camas -->
+            <section class="slide" data-title="9. Caso Práctico 2: Alerta Temprana TrakCare">
+                <div class="slide-header">
+                    <div class="slide-header-content">
+                        <div class="slide-category">CAPÍTULO 9 • CASO PRÁCTICO CLÍNICO TRAKCARE</div>
+                        <h2 class="slide-title">Caso Práctico 2 – Alerta Temprana de Deterioro Clínico y Gestión de
+                            Camas
+                        </h2>
+                        <p class="slide-subtitle">Seguridad del Paciente Hospitalizado, Prevención de Eventos Adversos y
+                            Disminución de Traslados Inesperados en Camas de Complejidad Media/Alta.</p>
+                    </div>
+                    <div class="slide-media-container" title="Alerta Temprana de Deterioro Clínico">
+                        <img src="images/ai-fails-14-20250401.webp" alt="Alerta Temprana TrakCare"
+                            class="slide-media-img">
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="glass-card highlight-cyan">
+                        <div class="card-subtitle">🏥 CASO HIPOTETICO SIMULADO</div>
+                        <div class="card-title" style="font-size: 1.4rem;">Contexto de Alta Complejidad (RCE TrakCare)
+                        </div>
+                        <p class="card-text">
+                            Las salas de hospitalización de especialidades médicas albergan pacientes frágiles (ej.
+                            insuficiencia cardíaca descompensada, cirrosis hepática avanzada, enfermedades autoinmunes
+                            sistémicas). El deterioro sutil de signos vitales o parámetros de laboratorio en TrakCare
+                            podría pasar desapercibido hasta que ocurre una falla multiorgánica o la necesidad de
+                            reanimación.
+                        </p>
+                        <div class="card-title" style="font-size: 1.3rem; margin-top: 18px;">Apoyo Mediante IA &
+                            Soporte CDSS</div>
+                        <p class="card-text">
+                            <strong>Problema a Resolver por IA:</strong> Automatizar el análisis continuo de las
+                            evoluciones médicas, curvas de signos vitales y exámenes de laboratorio registrados en
+                            TrakCare para identificar patrones de deterioro sutil (razonamiento abductivo) y sugerir
+                            precozmente al equipo tratante la revisión de scores de riesgo o interconsultas preventivas.
+                        </p>
+                        <div class="tag-group" style="margin-top: 14px;">
+                            <span class="tag cyan">RCE TrakCare</span>
+                            <span class="tag magenta">Razonamiento Abductivo</span>
+                            <span class="tag lime">Chain-of-Thought (CoT)</span>
+                            <span class="tag cyan">CDSS Hospitalario</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-card highlight-magenta">
+                        <div class="card-subtitle">📋 GUION TÉCNICO & PROMPTING CLÍNICO</div>
+                        <p class="card-text"><strong>Rol Clínico Asignado:</strong> <em>"Actúa como un médico internista
+                                experto en medicina intensiva y soporte de decisiones clínicas (CDSS)
+                                hospitalarias."</em></p>
+                        <p class="card-text"><strong>Contexto de Entrada (Variables TrakCare):</strong> Paciente
+                            hospitalizado en 7N por Insuficiencia Cardíaca. Tendencia últimas 24 hrs:
+                            Sepsis leve o alza de FR (22 rpm), caída de PAS (95 mmHg), aumento progresivo de creatinina
+                            y desaturación intermitente nocturna.</p>
+
+                        <div class="prompt-box">
+                            <div class="prompt-header">
+                                <span>PROMPT OPERATIVO CDSS - ALERTA TEMPRANA</span>
+                                <button class="btn-copy" onclick="copyPrompt('promptClinicalDeterioration')">Copiar
+                                    Prompt</button>
+                            </div>
+                            <code id="promptClinicalDeterioration">&lt;context&gt;
+Revisa los parámetros evolutivos de las últimas 24 horas registrados en el módulo de enfermería y laboratorios de TrakCare para un paciente hospitalizado en sala de medicina general de alta complejidad.
+&lt;/context&gt;
+
+&lt;task&gt;
+1. Utiliza razonamiento abductivo (generación de hipótesis causales ante signos sutiles de alarma) para proponer un diagnóstico diferencial del deterioro clínico (ej: insuficiencia cardíaca refractaria, nefropatía aguda intrahospitalaria, inicio de sepsis de foco oculto).
+2. Propone los pasos de razonamiento lógico intermedio (Chain-of-Thought) que justifican la alerta.
+3. Sugiere las acciones de seguridad recomendadas para el médico tratante (ej: control de gases venosos, evaluación de diuresis horaria estricta, revisión de balance hídrico en TrakCare).
+&lt;/task&gt;
+
+&lt;constraints&gt;
+- Mantener un tono estrictamente técnico y de apoyo clínico consultivo (CDSS).
+- Excluir diagnósticos especulativos no sustentados en los signos vitales aportados.
+&lt;/constraints&gt;</code>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 11: Caso Práctico 3 – Auditoría Inteligente de Epicrisis y Registros Clínicos en TrakCare -->
+            <section class="slide" data-title="10. Caso Práctico 3: Auditoría Epicrisis y GRD TrakCare">
+                <div class="slide-header">
+                    <div class="slide-header-content">
+                        <div class="slide-category">CAPÍTULO 10 • CASO PRÁCTICO CLÍNICO TRAKCARE</div>
+                        <h2 class="slide-title">Caso Práctico 3 – Auditoría Inteligente de Epicrisis y Codificación GRD
+                        </h2>
+                        <p class="slide-subtitle">Calidad del Registro Clínico, Trazabilidad de GES y Optimización de la
+                            Gestión del Recurso Financiero/Asistencial (GRD) en TrakCare.</p>
+                    </div>
+                    <div class="slide-media-container" title="Auditoría de Registros & Cyber Sci-Fi">
+                        <video src="images/6994873_Cyber_Science_Fiction_1280x720.mp4" autoplay loop muted playsinline
+                            class="slide-media-video"></video>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="glass-card highlight-lime">
+                        <div class="card-subtitle">📊 CALIDAD ASISTENCIAL & VALORIZACIÓN GRD</div>
+                        <div class="card-title" style="font-size: 1.4rem;">Contexto en Alta Complejidad (RCE TrakCare)
+                        </div>
+                        <p class="card-text">
+                            En un hospital de alta complejidad , la calidad de la epicrisis y el registro
+                            detallado de comorbilidades, procedimientos y diagnósticos secundarios en TrakCare
+                            determinan directamente la correcta valorización de los casos (GRD), el cumplimiento de
+                            garantías GES y la continuidad del cuidado ambulatorio o domiciliario. Las epicrisis
+                            incompletas o ambiguas generan pérdidas de trazabilidad institucional y glosas.
+                        </p>
+                        <div class="card-title" style="font-size: 1.3rem; margin-top: 18px;">Solución Mediante IA
+                            Auditora</div>
+                        <p class="card-text">
+                            <strong>Problema a Resolver por IA:</strong> Utilizar modelos locales o seguros en la nube
+                            (con acuerdos de confidencialidad estrictos) para analizar la nota de alta y la evolución en
+                            TrakCare, detectando vacíos de información, omisiones de diagnósticos secundarios
+                            codificables o falta de claridad en las indicaciones de alta para el nivel
+                            secundario/primario.
+                        </p>
+                        <div class="tag-group" style="margin-top: 14px;">
+                            <span class="tag lime">Codificación CIE-10</span>
+                            <span class="tag cyan">Gestión GRD</span>
+                            <span class="tag magenta">Few-Shot Prompting XML</span>
+                            <span class="tag cyan">Trazabilidad GES</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-card highlight-cyan">
+                        <div class="card-subtitle">📝 GUION TÉCNICO & PROMPTING DE AUDITORÍA</div>
+                        <p class="card-text"><strong>Rol Clínico Asignado:</strong> <em>"Actúa como un médico auditor de
+                                calidad asistencial y codificador clínico experto en sistemas de registros electrónicos
+                                (RCE TrakCare) y codificación internacional de enfermedades (CIE-10)."</em></p>
+                        <p class="card-text"><strong>Contexto de Entrada:</strong> Resumen de alta de paciente
+                            hospitalizado por descompensación de patología crónica autoinmune con múltiples
+                            comorbilidades (texto anonimizado en TrakCare).</p>
+
+                        <div class="prompt-box">
+                            <div class="prompt-header">
+                                <span>PROMPT OPERATIVO AUDITORÍA EPICRISIS Y GRD</span>
+                                <button class="btn-copy" onclick="copyPrompt('promptClinicalAuditGRD')">Copiar
+                                    Prompt</button>
+                            </div>
+                            <code id="promptClinicalAuditGRD">&lt;context&gt;
+Analiza el borrador de la epicrisis clínica generada en el módulo de alta de TrakCare.
+&lt;/context&gt;
+
+&lt;task&gt;
+1. Evalúa la completitud de la epicrisis evaluando la presencia de: Diagnóstico principal codificado, comorbilidades relevantes tratadas durante la hospitalización, medicamentos de alta con indicación clara, y plan de seguimiento en policlínico.
+2. Identifica posibles omisiones que afecten la calidad del registro o la complejidad informada (GRD).
+3. Redacta una sugerencia de mejora constructiva para el médico tratante que redactó el documento.
+&lt;/task&gt;
+
+&lt;constraints&gt;
+- Estructura la salida en formato de tabla de cumplimiento con viñetas de mejora.
+- Asegurar absoluta anonimización de los datos del paciente conforme a normativas de privacidad vigentes.
+&lt;/constraints&gt;</code>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 12: Ética, Gobernanza y Gestión de Riesgos en IA -->
+            <section class="slide" data-title="11. Ética, Gobernanza y Gestión de Riesgos">
+                <div class="slide-header">
+                    <div class="slide-header-content">
+                        <div class="slide-category">CAPÍTULO 11</div>
+                        <h2 class="slide-title">Ética, Gobernanza y Gestión de Riesgos en IA</h2>
+                        <p class="slide-subtitle">Mitigación de riesgos operacionales, datos comprometidos y principios
+                            de
+                            IA Responsable.</p>
+                    </div>
+                    <div class="slide-media-container" title="Ética, Gobernanza & Cyborg Humanoid">
+                        <video src="images/6994941_Cyborg_Humanoid_1280x720.mp4" autoplay loop muted playsinline
+                            class="slide-media-video"></video>
+                    </div>
+                </div>
+
+                <div class="grid-3">
+                    <div class="glass-card highlight-magenta">
+                        <div class="card-title">🛡️ Riesgos de Datos</div>
+                        <p class="card-text">Vulnerabilidad a envenenamiento de datos (data poisoning), manipulación
+                            maliciosa, sesgos de entrenamiento y brechas de seguridad de información confidencial.</p>
+                        <span class="tag magenta">Integridad & Envenenamiento</span>
+                    </div>
+
+                    <div class="glass-card highlight-lime">
+                        <div class="card-title">⚙️ Riesgos de Modelo & Operaciones</div>
+                        <p class="card-text">Desviación del modelo (model drift), degradación de precisión con el
+                            tiempo, ataques de ingeniería inversa de pesos y fallas de gobernanza.</p>
+                        <span class="tag lime">Model Drift & Robustez</span>
+                    </div>
+
+                    <div class="glass-card highlight-cyan">
+                        <div class="card-title">⚖️ Riesgos Éticos y Legales</div>
+                        <p class="card-text">Discriminación algorítmica por sesgos históricos, violaciones de privacidad
+                            institucional y responsabilidad legal ante decisiones automatizadas.</p>
+                        <span class="tag cyan">Sesgo Algorítmico & GDPR</span>
+                    </div>
+                </div>
+
+                <div class="glass-card">
+                    <div class="card-title">Pilares de la IA Responsable y Gobernanza Organizacional</div>
+                    <div class="grid-2" style="margin-bottom: 0;">
+                        <div>
+                            <p class="card-text"><strong>• Explicabilidad (XAI):</strong> Capacidad de auditar y
+                                comprender cómo el algoritmo derivó una conclusión específica.</p>
+                            <p class="card-text"><strong>• Imparcialidad (Fairness):</strong> Minimización de sesgos
+                                algorítmicos mediante la supervisión de diversidad de datos.</p>
+                        </div>
+                        <div>
+                            <p class="card-text"><strong>• Robustez Operativa:</strong> Protección del sistema frente a
+                                ataques adversarios e insumos atípicos.</p>
+                            <p class="card-text"><strong>• Transparencia & Trazabilidad:</strong> Visibilidad total del
+                                origen del dato y supervisión humana ineludible (Human-in-the-loop).</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 13: IA en Medicina de Precisión y Oncología Personalizada -->
+            <section class="slide" data-title="12. IA en Medicina de Precisión y Oncología Personalizada">
+                <div class="slide-header">
+                    <div class="slide-header-content">
+                        <div class="slide-category">CAPÍTULO 12 • SALUD GLOBAL & AVANCES EN ONCOLOGÍA</div>
+                        <h2 class="slide-title">IA en Medicina de Precisión y Oncología Personalizada</h2>
+                        <p class="slide-subtitle">Evidencia científica y marco institucional: Modelos PANDA en Nature Medicine, directrices regulatorias del NHC y validación internacional (FDA/OMS).</p>
+                    </div>
+                    <div class="slide-media-container" title="Medicina de Precisión & Oncología Personalizada">
+                        <video src="images/6994181_Bot_Robot_1280x720.mp4" autoplay loop muted playsinline
+                            class="slide-media-video"></video>
+                    </div>
+                </div>
+
+                <!-- Context Intro Card -->
+                <div class="glass-card highlight-cyan" style="margin-bottom: 20px;">
+                    <div class="card-subtitle">🏥 CONTEXTO CLÍNICO Y SUPERCOMPUTACIÓN MASIVA</div>
+                    <div class="card-title" style="font-size: 1.4rem;">Ecosistema Clínico Masivo de Oncología Personalizada en China</div>
+                    <p class="card-text" style="font-size: 1.12rem; line-height: 1.6;">
+                        El uso de la inteligencia artificial en la medicina de precisión y, específicamente, en la oncología personalizada en China, representa uno de los saltos tecnológicos más drásticos y acelerados de los últimos meses. Lo que hace poco parecía una visión teórica —diseñar tratamientos adaptados al milímetro para el tumor molecularmente único de cada paciente— hoy constituye un ecosistema clínico masivo respaldado por supercomputación y redes de hospitales de nivel terciario (Clase 3 Grado A).
+                    </p>
+                    <div class="tag-group" style="margin-top: 14px;">
+                        <span class="tag cyan">Medicina de Precisión</span>
+                        <span class="tag magenta">Oncología Personalizada</span>
+                        <span class="tag lime">Hospitales Clase 3 Grado A</span>
+                        <span class="tag cyan">Supercomputación Médica</span>
+                    </div>
+                </div>
+
+                <!-- Grid 3 with Updated Academic & Institutional Content -->
+                <div class="grid-3">
+                    <div class="glass-card highlight-cyan">
+                        <div class="card-subtitle">👁️ DETECCIÓN PRECOZ (MODELOS DE VISIÓN)</div>
+                        <div class="card-title" style="font-size: 1.25rem;">
+                            <span class="tooltip-wrapper" tabindex="0">
+                                <span class="tooltip-target">PANDA</span>
+                                <span class="tooltip-box" style="width: 380px; font-weight: 400;">
+                                    <strong>Modelo PANDA (Pancreatic Cancer Detection with Artificial Intelligence):</strong> Sistema avanzado de aprendizaje profundo desarrollado por DAMO Academy (el instituto de investigación de Alibaba) en colaboración con centros clínicos de referencia. Su irrupción científica fue validada y publicada en la revista <em>Nature Medicine</em>, marcando un hito en la oncología diagnóstica.
+                                </span>
+                            </span> y Redes Multicéntricas
+                        </div>
+                        <p class="card-text">
+                            Investigaciones publicadas en revistas científicas de alta revisión por pares han validado el uso de inteligencia artificial combinada con tomografías computarizadas sin contraste para el cribado oncológico a gran escala (especialmente en adenocarcinoma ductal pancreático). Estos marcos de aprendizaje profundo superan el rendimiento visual humano en la identificación de sutiles alteraciones de intensidad de gris en tejidos.
+                        </p>
+                        <div style="margin-top: 16px; border-top: 1px dashed #cbd5e1; padding-top: 12px; font-size: 0.92rem;">
+                            <div style="font-weight: 700; color: var(--blue-primary); margin-bottom: 6px;">🌐 Fuentes Académicas e Institucionales:</div>
+                            <p style="margin-bottom: 5px;">• <strong>Nature Medicine:</strong> <a href="https://www.nature.com/articles/s41591-023-02640-w" target="_blank" rel="noopener noreferrer" style="color: var(--blue-primary); text-decoration: underline; font-weight: 600;">Large-scale pancreatic cancer detection via non-contrast CT and deep learning (DOI: 10.1038/s41591-023-02640-w) ↗</a></p>
+                            <p>• <strong>U.S. FDA:</strong> Concesión de la designación de dispositivo innovador (<em>Breakthrough Device Designation</em>) a plataformas de IA médica para la detección oncológica.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card highlight-magenta">
+                        <div class="card-subtitle">🏛️ MARCOS REGULATORIOS Y SANITARIOS</div>
+                        <div class="card-title" style="font-size: 1.25rem;">Directrices Sanitarias Nacionales</div>
+                        <p class="card-text">
+                            Los esfuerzos sistemáticos para integrar analítica avanzada e inteligencia artificial en la infraestructura hospitalaria pública y privada responden a directrices estatales de planificación sanitaria a gran escala para el despliegue de herramientas de IA en centros de salud de nivel terciario.
+                        </p>
+                        <div style="margin-top: 16px; border-top: 1px dashed #cbd5e1; padding-top: 12px; font-size: 0.92rem;">
+                            <div style="font-weight: 700; color: var(--blue-primary); margin-bottom: 6px;">🌐 Fuentes Institucionales y Gubernamentales:</div>
+                            <p style="margin-bottom: 5px;">• <strong>National Health Commission (NHC):</strong> Informes sobre directrices de transformación digital y despliegue de herramientas de IA en centros de salud de nivel terciario.</p>
+                            <p>• <strong>Xinhua / State Council SCIO:</strong> Reportes oficiales sobre la implementación de tecnologías de apoyo diagnóstico en la red hospitalaria nacional.</p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card highlight-lime">
+                        <div class="card-subtitle">🧬 INVESTIGACIÓN TRASLACIONAL</div>
+                        <div class="card-title" style="font-size: 1.25rem;">Oncología de Precisión y Consorcios</div>
+                        <p class="card-text">
+                            El análisis de datos genómicos poblacionales y la implementación de la medicina personalizada se sustentan en consorcios hospitalarios globales y centros de alta especialización (como el Centro Nacional de Cáncer) para terapias guiadas por biomarcadores.
+                        </p>
+                        <div style="margin-top: 16px; border-top: 1px dashed #cbd5e1; padding-top: 12px; font-size: 0.92rem;">
+                            <div style="font-weight: 700; color: var(--blue-primary); margin-bottom: 6px;">🌐 Fuentes Académicas e Investigativas:</div>
+                            <p style="margin-bottom: 5px;">• <strong>National Cancer Center (China):</strong> Informes epidemiológicos y registros de incidencia tumoral y terapias guiadas por biomarcadores.</p>
+                            <p>• <strong>World Health Organization (WHO):</strong> Colaboraciones internacionales para la evaluación y despliegue de tecnologías de diagnóstico asistido en salud pública.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SLIDE 14: Conclusiones y Hoja de Ruta -->
+            <section class="slide" data-title="13. Conclusiones y Hoja de Ruta Ejecutiva">
+                <div class="slide-header">
+                    <div class="slide-header-content">
+                        <div class="slide-category">CAPÍTULO 13</div>
+                        <h2 class="slide-title">Decálogo de Buenas Prácticas y Hoja de Ruta</h2>
+                        <p class="slide-subtitle">Resumen ejecutivo para la adopción ágil y segura de Inteligencia
+                            Artificial en la organización.</p>
+                    </div>
+                    <div class="slide-media-container" title="Hoja de Ruta & Cierre Futuro">
+                        <video src="images/6994310_Sugar_Skull_Day_Of_The_Dead_720x1280.mp4" autoplay loop muted
+                            playsinline class="slide-media-video"></video>
+                    </div>
+                </div>
+
+                <div class="grid-2">
+                    <div class="glass-card highlight-cyan">
+                        <div class="card-title">Decálogo de Buenas Prácticas en Prompting</div>
+                        <div style="font-size: 1.1rem; color: var(--text-muted); line-height: 1.6;">
+                            <p style="margin-bottom: 6px;"><strong>1. Asigna siempre un Rol claro y experto.</strong>
+                            </p>
+                            <p style="margin-bottom: 6px;"><strong>2. Proporciona Contexto antes de solicitar la
+                                    orden.</strong></p>
+                            <p style="margin-bottom: 6px;"><strong>3. Usa verbos de acción precisos.</strong></p>
+                            <p style="margin-bottom: 6px;"><strong>4. Establece Restricciones explícitas de lo que NO
+                                    deseas.</strong></p>
+                            <p style="margin-bottom: 6px;"><strong>5. Solicita Formatos estructurados (tablas,
+                                    JSON).</strong></p>
+                            <p style="margin-bottom: 6px;"><strong>6. Aplica ejemplos (Few-Shot) cuando requieras alta
+                                    fidelidad.</strong></p>
+                            <p style="margin-bottom: 6px;"><strong>7. Elige el modelo de razonamiento adecuado
+                                    (Inductivo/Abductivo).</strong></p>
+                            <p style="margin-bottom: 6px;"><strong>8. Exige conclusiones no solicitadas para descubrir
+                                    valor oculto.</strong></p>
+                            <p style="margin-bottom: 6px;"><strong>9. Valida y contrasta respuestas (los LLMs
+                                    alucinan).</strong></p>
+                            <p style="margin-bottom: 6px;"><strong>10. Mantén la supervisión humana como criterio final
+                                    insustituible.</strong></p>
+                        </div>
+                    </div>
+
+                    <div class="glass-card highlight-magenta"
+                        style="display: flex; flex-direction: column; justify-content: space-between;">
+                        <div>
+                            <div class="card-title">Preguntas, Debate & Cierre</div>
+                            <p class="card-text" style="font-size: 1.25rem; margin-bottom: 24px;">
+                                Espacio abierto para discutir la implementación práctica de estos modelos de
+                                razonamiento y gobernanza de IA en sus áreas operativas.
+                            </p>
+                            <div class="tag-group">
+                                <span class="tag cyan">Innovación Tecnológica</span>
+                                <span class="tag magenta">Transformación Digital</span>
+                                <span class="tag lime">Prompting Avanzado</span>
+                            </div>
+                        </div>
+
+                        <div
+                            style="background: #eff6ff; padding: 20px; border-radius: var(--radius-sm); border: 1.5px solid #bfdbfe; margin-top: 30px;">
+                            <div style="font-weight: 800; color: var(--blue-primary); font-size: 1.2rem;">
+                                Hospital Metropolitano • Subdirección Administrativa</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
     </div>
 
-    <script src="app.js"></script>
+    <!-- Bottom Controls Footer -->
+    <footer>
+        <div class="progress-bar-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div class="footer-branding-text">
+            <span class="footer-hospital-label">Hospital Metropolitano</span>
+            <span class="footer-divider-label">•</span>
+            <span class="footer-presenter-label">Expositor: Guido Corral Arancibia</span>
+        </div>
+
+
+    </footer>
+
+    <!-- Toast Component -->
+    <div class="toast" id="toast">Prompt copiado al portapapeles con éxito ✨</div>
+
+    <!-- JavaScript Logic -->
+    <script>
+        // Global Navigation Logic
+        let currentIndex = 0;
+        let slides = [];
+        let slideItems = [];
+
+        function updateSlideView() {
+            if (!slides || slides.length === 0) return;
+
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === currentIndex);
+            });
+
+            if (slideItems && slideItems.length > 0) {
+                slideItems.forEach((item, i) => {
+                    item.classList.toggle('active', i === currentIndex);
+                });
+            }
+
+            // Update Counter & Progress Bar
+            const slideCounter = document.getElementById('slideCounter');
+            const progressBar = document.getElementById('progressBar');
+            if (slideCounter) {
+                slideCounter.textContent = `Diapositiva ${currentIndex + 1} / ${slides.length}`;
+            }
+            if (progressBar) {
+                const progressPercent = ((currentIndex + 1) / slides.length) * 100;
+                progressBar.style.width = `${progressPercent}%`;
+            }
+
+            // Update Stage Floating Nav Buttons
+            const btnStagePrev = document.getElementById('btnStagePrev');
+            const btnStageNext = document.getElementById('btnStageNext');
+
+            const isFirst = currentIndex === 0;
+            const isLast = currentIndex === slides.length - 1;
+
+            if (btnStagePrev) btnStagePrev.style.display = isFirst ? 'none' : 'flex';
+            if (btnStageNext) btnStageNext.style.display = isLast ? 'none' : 'flex';
+
+            // Scroll stage container to top
+            const stage = document.getElementById('stage');
+            if (stage) stage.scrollTop = 0;
+        }
+
+        function goToSlide(index) {
+            if (slides && index >= 0 && index < slides.length) {
+                currentIndex = index;
+                updateSlideView();
+            }
+        }
+
+        function goToNextSlide() {
+            if (slides && currentIndex < slides.length - 1) {
+                currentIndex++;
+                updateSlideView();
+            }
+        }
+
+        function goToPrevSlide() {
+            if (slides && currentIndex > 0) {
+                currentIndex--;
+                updateSlideView();
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            slides = document.querySelectorAll('.slide');
+            const slideList = document.getElementById('slideList');
+            const sidebar = document.getElementById('sidebar');
+            const btnToggleSidebar = document.getElementById('btnToggleSidebar');
+            const btnFullscreen = document.getElementById('btnFullscreen');
+            const searchInput = document.getElementById('searchInput');
+            const toast = document.getElementById('toast');
+
+            // Populate Sidebar Index
+            if (slideList) {
+                slideList.innerHTML = '';
+                slides.forEach((slide, index) => {
+                    const title = slide.getAttribute('data-title') || `Diapositiva ${index + 1}`;
+                    const li = document.createElement('li');
+                    li.className = `slide-item ${index === 0 ? 'active' : ''}`;
+                    li.innerHTML = `
+                        <span class="slide-num">${index + 1}</span>
+                        <span class="slide-title-text">${title}</span>
+                    `;
+                    li.addEventListener('click', () => goToSlide(index));
+                    slideList.appendChild(li);
+                });
+            }
+
+            slideItems = document.querySelectorAll('.slide-item');
+
+            // Keyboard Navigation
+            document.addEventListener('keydown', (e) => {
+                if (document.activeElement === searchInput) return;
+
+                if (e.key === 'ArrowRight' || e.key === 'Space' || e.key === 'PageDown') {
+                    e.preventDefault();
+                    goToNextSlide();
+                } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+                    e.preventDefault();
+                    goToPrevSlide();
+                }
+            });
+
+            // Toggle Sidebar
+            if (btnToggleSidebar && sidebar) {
+                btnToggleSidebar.addEventListener('click', () => {
+                    sidebar.classList.toggle('collapsed');
+                });
+            }
+
+            // Toggle Fullscreen
+            if (btnFullscreen) {
+                btnFullscreen.addEventListener('click', () => {
+                    if (!document.fullscreenElement) {
+                        document.documentElement.requestFullscreen().catch(err => {
+                            console.log('Error entering fullscreen:', err);
+                        });
+                    } else {
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen();
+                        }
+                    }
+                });
+            }
+
+            // Search functionality
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    const query = e.target.value.toLowerCase();
+                    slideItems.forEach((item, idx) => {
+                        const text = item.textContent.toLowerCase();
+                        const slideText = slides[idx].textContent.toLowerCase();
+                        if (text.includes(query) || slideText.includes(query)) {
+                            item.style.display = 'flex';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            }
+
+            // Global Copy Prompt Function
+            window.copyPrompt = function (elementId) {
+                const codeElement = document.getElementById(elementId);
+                if (codeElement) {
+                    const text = codeElement.innerText;
+                    navigator.clipboard.writeText(text).then(() => {
+                        showToast('Prompt copiado al portapapeles con éxito ✨');
+                    }).catch(err => {
+                        console.error('Error al copiar: ', err);
+                    });
+                }
+            };
+
+            function showToast(message) {
+                if (toast) {
+                    toast.textContent = message;
+                    toast.classList.add('show');
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                    }, 3000);
+                }
+            }
+
+            // Media Lightbox Modal Handler
+            document.querySelectorAll('.slide-media-container').forEach(container => {
+                container.addEventListener('click', () => {
+                    const media = container.querySelector('img, video');
+                    if (!media) return;
+                    const modal = document.getElementById('mediaModal');
+                    const modalContent = document.getElementById('mediaModalContent');
+                    if (media.tagName.toLowerCase() === 'img') {
+                        modalContent.innerHTML = `<img src="${media.src}" style="max-width: 88vw; max-height: 82vh; object-fit: contain; display: block; border-radius: 12px;">`;
+                    } else {
+                        modalContent.innerHTML = `<video src="${media.src}" autoplay loop muted controls style="max-width: 88vw; max-height: 82vh; display: block; border-radius: 12px;"></video>`;
+                    }
+                    modal.style.display = 'flex';
+                });
+            });
+
+            window.closeMediaModal = function () {
+                const modal = document.getElementById('mediaModal');
+                if (modal) modal.style.display = 'none';
+            };
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') closeMediaModal();
+            });
+
+            // Initial view update
+            updateSlideView();
+        });
+    </script>
+
+    <!-- Media Lightbox Modal -->
+    <div id="mediaModal"
+        style="display: none; position: fixed; inset: 0; background: rgba(15, 23, 42, 0.92); backdrop-filter: blur(14px); z-index: 10000; justify-content: center; align-items: center; cursor: zoom-out;"
+        onclick="closeMediaModal()">
+        <div style="position: relative; max-width: 90vw; max-height: 88vh; border-radius: 20px; overflow: hidden; border: 3px solid #38bdf8; box-shadow: 0 25px 60px rgba(0,0,0,0.6);"
+            onclick="event.stopPropagation()">
+            <div id="mediaModalContent"></div>
+            <button
+                style="position: absolute; top: 14px; right: 14px; background: rgba(15,23,42,0.85); border: 1.5px solid #94a3b8; color: #fff; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 1.3rem; display: flex; align-items: center; justify-content: center;"
+                onclick="closeMediaModal()" title="Cerrar (Esc)">✕</button>
+        </div>
+    </div>
 </body>
+
 </html>
